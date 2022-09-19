@@ -18,25 +18,24 @@
         <div id="app" class="min-h-screen bg-gray-100">
             <x-header/>
 
-            <div class="bg-gradient-to-tl from-green-700 to-yellow-500 grid grid-cols-12 gap-4 h-[450px] flex items-center">
-                <div class="col-span-6">
-                    <img src="{{ asset('images/hero.png') }}" alt="green-food-packaging" class="w-[250px] h-[250px] ml-auto mr-14">
+            <div class="bg-gradient-to-tl from-green-700 to-yellow-500 grid grid-cols-12 md:gap-4 h-[450px] flex md:items-center">
+                <div class="col-span-12 md:col-span-6 flex-1 flex items-end pb-8">
+                    <img src="{{ asset('images/hero.png') }}" alt="green-food-packaging" class="w-[150px] h-[150px] mx-auto md:w-[200px]
+                    md:h-[200px] lg:w-[250px] lg:h-[250px] md:ml-auto lg:mr-14">
                 </div>
 
-                <div class="col-span-6 p-10">
-                    <h1 class="text-5xl font-bold text-white leading-tight tracking-tight">
-                        Multi-Criteria Decision
-                        <br />
-                        making on
-                        <br />
-                        Green Food Packaging
+                <div class="col-span-12 md:col-span-6 px-5 md:p-10 md:pl-0">
+                    <h1 class="text-center text-2xl md:text-4xl lg:text-5xl md:max-w-[500px] font-bold text-white md:leading-tight lg:leading-tight md:tracking-tight lg:tracking-tight">
+                        Multi-Criteria Decision making on Green Food Packaging
                     </h1>
                 </div>
             </div>
 
-            <main class="container py-8">
-                @yield('main')
-            </main>
+            <div class="bg-repeat-y bg-center" style="background-image: url({{ asset('images/background.png') }}); background-size: 100px;">
+                <main class="container py-8">
+                    @yield('main')
+                </main>
+            </div>
         </div>
 
         <script src="{{ asset('js/app.js') }}" defer></script>

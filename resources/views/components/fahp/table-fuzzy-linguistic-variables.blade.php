@@ -1,4 +1,4 @@
-<table class="table-fixed w-full rounded-lg overflow-hidden shadow-lg w-[800px]">
+<table class="w-full rounded-lg shadow-lg mb-10 text-sm lg:text-base lg:w-[800px] overflow-hidden">
     <thead class="bg-teal-600 text-white">
         <tr>
             <th class="p-4">Linguistic</th>

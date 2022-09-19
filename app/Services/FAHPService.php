@@ -98,6 +98,10 @@ class FAHPService
                 switch ($key) {
                     case 't1':
                         $result[self::MATERIAL][0] = $fixed;
+                        $result[self::USAGE][1] = $fixed; // diagonal
+                        $result[self::PROFILE][2] = $fixed; // diagonal
+                        $result[self::ISSUES][3] = $fixed; // diagonal
+                        $result[self::PROPERTIES][4] = $fixed; // diagonal
                         break;
                     case 't2':
                         $result[self::USAGE][0] = $fixed;
@@ -122,6 +126,10 @@ class FAHPService
                 switch ($key) {
                     case 't1':
                         $result[self::MATERIAL][0] = $lmu_value;
+                        $result[self::USAGE][1] = $lmu_value; // diagonal
+                        $result[self::PROFILE][2] = $lmu_value; // diagonal
+                        $result[self::ISSUES][3] = $lmu_value; // diagonal
+                        $result[self::PROPERTIES][4] = $lmu_value; // diagonal
                         break;
                     case 't2':
                         $result[self::USAGE][0] = $lmu_value;

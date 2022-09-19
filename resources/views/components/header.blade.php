@@ -1,6 +1,6 @@
 <header class="px-4 bg-green-800 h-16 shadow-lg">
     <div class="flex items-center h-full ">
-        <div class="text-white text-xl font-semibold mr-20">
+        <div class="text-white mr-10 lg:text-xl font-semibold lg:mr-20">
             Green Food Packaging
         </div>
         <ul class="flex items-center justify-center h-full">

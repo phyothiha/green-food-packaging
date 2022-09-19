@@ -4,7 +4,9 @@
     <div class="mb-12">
         <h3 class="text-2xl mb-4">Fuzzy linguistic variables for the criteria</h3>
 
-        <x-fahp.table-fuzzy-linguistic-variables/>
+        <div class="">
+            <x-fahp.table-fuzzy-linguistic-variables/>
+        </div>
     </div>
 
     <div class="mb-12" x-data="{
@@ -56,11 +58,11 @@
     }">
         <h3 class="text-2xl mb-4">FAHP Input</h3>
 
-        <form action="{{ route('fahp.store') }}" method="POST">
+        <form action="{{ route('fahp.store') }}" method="POST" class="">
             @method('POST')
             @csrf
 
-            <table class="table-fixed w-full rounded-lg overflow-hidden shadow-lg w-[800px] mb-5">
+            <table class="w-full rounded-lg shadow-lg mb-10 text-sm lg:w-[800px] overflow-hidden lg:text-base">
                 <thead class="bg-teal-600 text-white">
                     <tr>
                         <th class="p-4"></th>
