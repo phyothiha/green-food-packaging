@@ -297,7 +297,8 @@ class FAHPService
             // final column
             [$val1, $val2, $val3] = explode(',', $mean_value[$key][0]);
             [$lower, $middle, $upper] = $lmu_values;
-            $mean_value[$key][] = round($val1/$lower, 3) . ',' . round($val2/$middle, 3) . ',' . round($val3/$upper, 3);
+
+            $mean_value[$key][] = round((float) $val1/$lower, 3) . ',' . round((float) $val2/$middle, 3) . ',' . round((float) $val3/$upper, 3);
         }
 
         return $mean_value;
