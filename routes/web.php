@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FAHPCalculationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,8 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('fahp.index');
+})->name('home');
+
+Route::get('fahp/create', [FAHPCalculationController::class, 'create'])->name('fahp.create');
+Route::post('fahp', [FAHPCalculationController::class, 'store'])->name('fahp.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
