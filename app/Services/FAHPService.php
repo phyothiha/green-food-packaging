@@ -11,21 +11,6 @@ class FAHPService
     public const ISSUES = 'Consumer/Marketing_Issues';
     public const PROPERTIES = 'Properties';
 
-    // reverse values order
-    private function method_lmu($value)
-    {
-        [$val3, $val2, $val1] = explode(',', $value);
-
-        return [$val1, $val2, $val3];
-    }
-
-    private function print_comma_separated($numerator, array $arr_value)
-    {
-        $format = "$numerator/%s,$numerator/%s,$numerator/%s";
-
-        return sprintf($format, ...$arr_value);
-    }
-
     public function calculate_fahp_phase_one($types)
     {
         $result = [];
@@ -265,17 +250,6 @@ class FAHPService
         return $result;
     }
 
-    private function calc_val($value)
-    {
-        if (str_contains($value, '/')) {
-            [$val1, $val2] = explode('/', $value);
-
-            return $val1 / $val2;
-        }
-
-        return (int) $value;
-    }
-
     public function calculate_fuzzy_weight($types)
     {
         $result = $this->calculate_fuzzy_geometric_mean_value($types);
@@ -310,5 +284,31 @@ class FAHPService
         }
 
         return $mean_value;
+    }
+
+    // reverse values order
+    private function method_lmu($value)
+    {
+        [$val3, $val2, $val1] = explode(',', $value);
+
+        return [$val1, $val2, $val3];
+    }
+
+    private function print_comma_separated($numerator, array $arr_value)
+    {
+        $format = "$numerator/%s,$numerator/%s,$numerator/%s";
+
+        return sprintf($format, ...$arr_value);
+    }
+
+    private function calc_val($value)
+    {
+        if (str_contains($value, '/')) {
+            [$val1, $val2] = explode('/', $value);
+
+            return $val1 / $val2;
+        }
+
+        return (int) $value;
     }
 }

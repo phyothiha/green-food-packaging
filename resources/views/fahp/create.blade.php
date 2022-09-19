@@ -10,7 +10,6 @@
     </div>
 
     <div class="mb-12" x-data="{
-        foo: 'bar',
         data: [
             { value: 0, name: 'Select', isSelected: false },
             { value: 1, name: 'Equally Important', isSelected: false },

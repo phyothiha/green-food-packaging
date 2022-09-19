@@ -31,11 +31,11 @@
                 </div>
             </div>
 
-            <div class="bg-repeat-y bg-center" style="background-image: url({{ asset('images/background.png') }}); background-size: 100px;">
-                <main class="container py-8">
+            <div class="relative">
+                <div class="z-10 bg-repeat-y bg-center opacity-20 absolute inset-0" style="background-image: url({{ asset('images/sprite.png') }}); background-size: 100px;"></div>
+                <main class="container py-8 relative z-20">
                     @yield('main')
                 </main>
-            </div>
         </div>
 
         <script src="{{ asset('js/app.js') }}" defer></script>
