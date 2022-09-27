@@ -1,12 +1,24 @@
 @extends('layouts.main')
 
 @section('main')
-    <div class="mb-12">
+    {{-- <div class="mb-12">
         <h3 class="text-2xl mb-4">Fuzzy linguistic variables for the criteria</h3>
 
         <div class="">
             <x-fahp.table-fuzzy-linguistic-variables/>
         </div>
+    </div> --}}
+
+    <div class="mb-14">
+        <a
+            href="{{ route('food-type-for-production.calculation') }}"
+            class="transition ease-in-out duration-300 text-xs p-3 rounded-lg inline-flex items-center gap-2 bg-indigo-200 text-gray-500 hover:bg-indigo-500 hover:text-gray-50"
+            x-on:click="window.open('', '_blank', '');window.close();"
+        >
+            <x-icons.hi-arrow-left-circle class="w-4 h-4" />
+
+            Back to Calculation Selection
+        </a>
     </div>
 
     <div class="mb-12" x-data="{
@@ -55,13 +67,13 @@
             })
         },
     }">
-        <h3 class="text-2xl mb-4">FAHP Input</h3>
+        <h3 class="text-xl mb-4">Selection scale of criteria for prioritization environmental</h3>
 
-        <form action="{{ route('fahp.store') }}" method="POST" class="">
+        <form action="{{ route('food-type-for-production.calculation.fahp.store') }}" method="POST" class="">
             @method('POST')
             @csrf
 
-            <table class="w-full rounded-lg shadow-lg mb-10 text-sm lg:w-[800px] overflow-hidden lg:text-base">
+            <table class="w-full rounded-lg shadow-lg mb-10 text-sm lg:w-[800px] overflow-hidden">
                 <thead class="bg-teal-600 text-white">
                     <tr>
                         <th class="p-4"></th>
@@ -82,7 +94,7 @@
                         </td>
 
                         <td class="p-4">
-                            <select class="w-full rounded-lg border-gray-200 text-sm" name="type[t1]" x-model="select.field_1"
+                            <select class="w-full rounded-lg border-gray-200 text-sm appearance-none" name="type[t1]" x-model="select.field_1"
                                 x-on:change="markedAsSelected()"
                             >
                                 <template x-for="item in data">
@@ -100,7 +112,7 @@
                             Type of Usage
                         </td>
                         <td class="p-4">
-                            <select class="w-full rounded-lg border-gray-200 text-sm" name="type[t2]" x-model="select.field_2"
+                            <select class="w-full rounded-lg border-gray-200 text-sm appearance-none" name="type[t2]" x-model="select.field_2"
                                 x-on:change="markedAsSelected()"
                             >
                                 <template x-for="item in data">
@@ -118,7 +130,7 @@
                             Environmental Profile
                         </td>
                         <td class="p-4">
-                            <select class="w-full rounded-lg border-gray-200 text-sm" name="type[t3]" x-model="select.field_3"
+                            <select class="w-full rounded-lg border-gray-200 text-sm appearance-none" name="type[t3]" x-model="select.field_3"
                                 x-on:change="markedAsSelected()"
                             >
                                 <template x-for="item in data">
@@ -136,7 +148,7 @@
                             Consumer/Marketing Issues
                         </td>
                         <td class="p-4">
-                            <select class="w-full rounded-lg border-gray-200 text-sm" name="type[t4]" x-model="select.field_4"
+                            <select class="w-full rounded-lg border-gray-200 text-sm appearance-none" name="type[t4]" x-model="select.field_4"
                                 x-on:change="markedAsSelected()"
                             >
                                 <template x-for="item in data">
@@ -154,7 +166,7 @@
                             Properties
                         </td>
                         <td class="p-4">
-                            <select class="w-full rounded-lg border-gray-200 text-sm" name="type[t5]" x-model="select.field_5"
+                            <select class="w-full rounded-lg border-gray-200 text-sm appearance-none" name="type[t5]" x-model="select.field_5"
                                 x-on:change="markedAsSelected()"
                             >
                                 <template x-for="item in data">
@@ -170,7 +182,7 @@
                 </tbody>
             </table>
 
-            <button
+            {{-- <button
                 type="submit"
                 class="
                     rounded-lg bg-green-700 text-white px-4 py-2 transition duration-300 ease-in-out hover:bg-green-800
@@ -179,7 +191,16 @@
                 x-bind:disabled="!checkAllSelected"
             >
                 Calculate
-            </button>
+            </button> --}}
+
+            <x-theme.button-submit :route="route('food-type-for-production.calculation')" class="p-4 bg-green-700 text-white hover:bg-green-800
+            disabled:bg-gray-300 disabled:cursor-not-allowed" x-bind:disabled="!checkAllSelected">
+                <span class="text-sm">Calculate</span>
+
+                <x-slot name="slot_after_text">
+                    <x-icons.hi-calculator class="w-5 h-5" />
+                </x-slot>
+            </x-theme.button-submit>
         </form>
     </div>
 @endsection

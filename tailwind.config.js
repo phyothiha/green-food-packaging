@@ -20,7 +20,7 @@ module.exports = {
         },
         extend: {
             fontFamily: {
-                sans: ["Nunito", ...defaultTheme.fontFamily.sans],
+                sans: ["Nunito", "Poppins", ...defaultTheme.fontFamily.sans],
             },
         },
     },

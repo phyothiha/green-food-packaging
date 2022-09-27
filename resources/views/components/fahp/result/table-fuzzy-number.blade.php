@@ -2,7 +2,7 @@
     'result'
 ])
 
-<table class="w-full rounded-lg shadow-lg mb-10 text-sm lg:text-base overflow-hidden">
+<table class="w-full rounded-lg shadow-lg text-sm overflow-hidden">
     <thead class="bg-teal-600 text-white">
         <tr>
             <th class="p-4"></th>
