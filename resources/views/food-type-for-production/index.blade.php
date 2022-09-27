@@ -42,7 +42,6 @@
                     <tr>
                         <th class="px-5 py-3.5"></th>
                         <th class="px-5 py-3.5">Type of Food</th>
-                        <th class="px-5 py-3.5">Type of Material</th>
                     </tr>
                 </thead>
 
@@ -53,7 +52,6 @@
                                 <input type="radio" class="appearance-none checked:bg-indigo-500" name="foobar" />
                             </td>
                             <td class="px-5 py-3.5" x-text="food"></td>
-                            <td class="px-5 py-3.5"></td>
                         </tr>
                     </template>
                 </tbody>

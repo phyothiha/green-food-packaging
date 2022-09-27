@@ -38,7 +38,7 @@
             <div class="relative z-20 grid grid-cols-12 min-h-screen">
 
                 <div class="col-span-6 px-20 py-16">
-                    <button
+                    {{-- <button
                         x-data
                         class="transition ease-in-out duration-300 text-xs p-2.5 rounded-lg flex items-center gap-2 bg-gray-200 text-gray-500 hover:bg-red-500 hover:text-gray-50"
                         x-on:click="window.open('', '_blank', '');window.close();"
@@ -46,7 +46,7 @@
                         <x-icons.hi-arrow-left-circle class="w-4 h-4" />
 
                         Exit Application
-                    </button>
+                    </button> --}}
 
 
                     <h1 class="font-semibold lg:mt-16 lg:mb-12 lg:text-4xl">{{ config('app.name') }}</h1>
@@ -83,7 +83,7 @@
                     </div>
 
                     <div class="md:max-w-[500px]">
-                        <h1 class="text-center text-xl md:text-4xl lg:text-4xl font-semibold text-white md:leading-snug lg:leading-snug tracking-normal">
+                        <h1 class="text-center text-xl md:text-4xl font-semibold text-white md:leading-snug tracking-normal">
                             Multi-Criteria Decision making on Green Food Packaging
                         </h1>
                     </div>
