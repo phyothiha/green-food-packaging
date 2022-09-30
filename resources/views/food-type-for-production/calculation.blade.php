@@ -16,8 +16,8 @@
             </li>
         </ul> --}}
 
-        <ul class="flex items-center justify-center gap-4">
-            <li>
+        <ul class="flex items-center justify-center">
+            <li class="pr-4">
                 <a href="#" @click.prevent="tab = 'fahp'" class="block w-[120px] text-center p-2.5 border-2 rounded-lg text-sm transition ease-in-out duration-300 hover:bg-green-800 hover:border-green-800 hover:text-white hover:shadow-lg" :class="tab === 'fahp' ? 'bg-green-800 border-green-800 text-white shadow-lg' : 'border-green-600 bg-white'">FAHP</a>
             </li>
             <li>
