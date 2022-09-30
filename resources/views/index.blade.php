@@ -72,6 +72,11 @@
                                     Food Type for Production
                                 </x-index.navigation-link>
                             </li>
+                            <li>
+                                <x-index.navigation-link :link="route('suggestion')">
+                                    Suggestion
+                                </x-index.navigation-link>
+                            </li>
                         </ul>
                     </div>
                 </div>

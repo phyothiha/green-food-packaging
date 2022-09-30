@@ -27,6 +27,10 @@ Route::get('food-packaging-material', function () {
     return view('food-packaging-material.index');
 })->name('food-packaging-material.index');
 
+Route::get('suggestion', function () {
+    return view('suggestion');
+})->name('suggestion');
+
 // Food Type for Production
 Route::get('food-type-for-production', function () {
     return view('food-type-for-production.index');

@@ -55,11 +55,11 @@
                     Food Type for Production
                 </a>
             </li>
-            {{-- <li class="h-full">
-                <x-header-link route-name="fahp.create">
-                    Calculations
+            <li class="h-full">
+                <x-header-link route-name="suggestion">
+                    Suggestion
                 </x-header-link>
-            </li> --}}
+            </li>
         </ul>
     </div>
 </header>
