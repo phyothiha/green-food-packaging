@@ -2,7 +2,7 @@
 
 @section('main')
 <div class="mb-12" x-data="{
-    tab: 'ftopsis'
+    tab: 'fahp'
 }">
     <div class="mb-14">
         <a
