@@ -1,5 +1,4 @@
 @props([
-    'route',
     'slot_before_text',
     'slot_after_text',
 ])

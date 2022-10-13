@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Models\FahpFuzzyWeight;
+
 class FAHPService
 {
     // this order needs to sync with fahp input table column order
@@ -252,6 +254,8 @@ class FAHPService
 
     public function calculate_fuzzy_weight($types)
     {
+        FahpFuzzyWeight::truncate();
+
         $result = $this->calculate_fuzzy_geometric_mean_value($types);
 
         $mean_value = [];
@@ -280,8 +284,21 @@ class FAHPService
             [$val1, $val2, $val3] = explode(',', $mean_value[$key][0]);
             [$lower, $middle, $upper] = $lmu_values;
 
-            $mean_value[$key][] = round((float) $val1/$lower, 3) . ',' . round((float) $val2/$middle, 3) . ',' . round((float) $val3/$upper, 3);
+            $seg1 = round((float) $val1/$lower, 3);
+            $seg2 = round((float) $val2/$middle, 3);
+            $seg3 = round((float) $val3/$upper, 3);
+
+            $mean_value[$key][] = $seg1 . ',' . $seg2 . ',' . $seg3;
+
+            FahpFuzzyWeight::insert([
+                'type' => $key,
+                'seg1' => $seg1,
+                'seg2' => $seg2,
+                'seg3' => $seg3,
+            ]);
         }
+
+
 
         return $mean_value;
     }

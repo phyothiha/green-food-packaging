@@ -1,8 +1,8 @@
 @extends('layouts.main')
 
 @section('main')
-    <table class="w-full rounded-lg shadow-lg text-sm overflow-hidden border-collapse border border-slate-500">
-        <thead class="bg-teal-600 text-white">
+    <table class="w-full overflow-hidden text-sm border border-collapse rounded-lg shadow-lg border-slate-500">
+        <thead class="text-white bg-teal-600">
             <tr>
                 <th class="p-2.5">Type of Materials</th>
                 <th class="p-2.5">Environmental Profile</th>

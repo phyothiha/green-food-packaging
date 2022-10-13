@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\FAHPCalculationController;
+use App\Http\Controllers\FoodTypeForProductionController;
+use App\Http\Controllers\FTOPSISCalculationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,19 +34,32 @@ Route::get('suggestion', function () {
 })->name('suggestion');
 
 // Food Type for Production
-Route::get('food-type-for-production', function () {
-    return view('food-type-for-production.index');
-})->name('food-type-for-production.index');
+// Route::get('food-type-for-production', function () {
+//     return view('food-type-for-production.index');
+// })->name('food-type-for-production.index');
 
-Route::get('food-type-for-production/calculation', function () {
-    return view('food-type-for-production.calculation');
-})->name('food-type-for-production.calculation');
+// Route::get('food-type-for-production/calculation', function () {
+//     return view('food-type-for-production.calculation');
+// })->name('food-type-for-production.calculation');
 
-Route::get('food-type-for-production/calculation/fahp', [FAHPCalculationController::class, 'create'])
-    ->name('food-type-for-production.calculation.fahp');
+
+Route::group([
+    'controller' => FoodTypeForProductionController::class,
+    'prefix' => 'food-type-for-production',
+    'as' => 'food-type-for-production.',
+], function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/calculation', 'show')->name('calculation');
+});
+
+// Route::get('food-type-for-production/calculation/fahp', [FAHPCalculationController::class, 'create'])
+//     ->name('food-type-for-production.calculation.fahp');
 
 Route::post('food-type-for-production/calculation/fahp', [FAHPCalculationController::class, 'store'])
     ->name('food-type-for-production.calculation.fahp.store');
+
+Route::post('food-type-for-production/calculation/ftopsis', [FTOPSISCalculationController::class, 'store'])
+    ->name('food-type-for-production.calculation.ftopsis.store');
 
 // Route::get('/fahp', function () {
 //     return view('fahp.index');

@@ -14,10 +14,10 @@ class FAHPCalculationController extends Controller
         //
     }
 
-    public function create()
-    {
-        return view('fahp.create');
-    }
+    // public function create()
+    // {
+    //     return view('fahp.create');
+    // }
 
     public function store(Request $request)
     {
