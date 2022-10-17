@@ -31,11 +31,11 @@
         </style>
     </head>
     <body class="antialiased">
-        <div id="app" class="min-h-screen relative bg-indigo-50">
+        <div id="app" class="relative min-h-screen bg-indigo-50">
 
             <div class="z-10 opacity-10 absolute inset-0 bg-repeat bg-auto bg-center bg-[length:800px_800px]" style="background-image: url({{ asset('images/background.jpg') }});"></div>
 
-            <div class="relative z-20 grid grid-cols-12 min-h-screen">
+            <div class="relative z-20 grid min-h-screen grid-cols-12">
 
                 <div class="col-span-6 px-20 py-16">
                     {{-- <button
@@ -81,14 +81,14 @@
                     </div>
                 </div>
 
-                <div class="col-span-6 bg-gradient-to-tl from-green-700 to-yellow-500 flex flex-col items-center justify-center">
+                <div class="flex flex-col items-center justify-center col-span-6 bg-gradient-to-tl from-green-700 to-yellow-500">
                     <div>
                         <img src="{{ asset('images/hero.png') }}" alt="green-food-packaging" class="w-[150px] h-[150px] mx-auto md:w-[200px]
                         md:h-[200px] lg:w-[250px] lg:h-[250px] mb-10">
                     </div>
 
                     <div class="md:max-w-[500px]">
-                        <h1 class="text-center text-xl md:text-4xl font-semibold text-white md:leading-snug tracking-normal">
+                        <h1 class="text-xl font-semibold tracking-normal text-center text-white md:text-4xl md:leading-snug">
                             Multi-Criteria Decision making on Green Food Packaging
                         </h1>
                     </div>
@@ -98,14 +98,19 @@
         </div>
 
         <script src="{{ asset('js/app.js') }}"></script>
+        <script>
+            window.addEventListener('beforeunload', function (event) {
+                localStorage.clear();
+            });
+        </script>
     </body>
 </html>
 
 {{--
 @section('main')
-    <h3 class="text-2xl mb-8">Select a calculation</h3>
+    <h3 class="mb-8 text-2xl">Select a calculation</h3>
 
-    <div class="grid lg:grid-cols-4 gap-4">
+    <div class="grid gap-4 lg:grid-cols-4">
         <div>
             <x-fahp.link-card :link="route('fahp.create')">
                 FAHP Calculations

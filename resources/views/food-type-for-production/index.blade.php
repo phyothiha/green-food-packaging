@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function () {
     calculationBtn.addEventListener('click', function (e) {
         e.preventDefault()
 
-        if (! storageItem) {
+        if (! localStorage.getItem('selectedMaterialType')) {
             errorMessageDiv.classList.remove('hidden')
             location.href = "{{ route('food-type-for-production.index') }}#page-anchor"
         } else {

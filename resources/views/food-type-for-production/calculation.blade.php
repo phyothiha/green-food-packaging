@@ -223,7 +223,7 @@
 
     <div x-show="tab == 'ftopsis'">
         <h3 class="mb-4 text-xl">
-            FTOPSIS Selection Table
+            FTOPSIS Selection Table for "{{ request()->q }}"
         </h3>
 
         <form action="{{ route('food-type-for-production.calculation.ftopsis.store') }}" method="POST" class="">

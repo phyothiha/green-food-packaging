@@ -20,9 +20,9 @@ Route::get('/', function () {
     return view('index');
 })->name('index');
 
-Route::get('/test', function () {
-    return view('test');
-});
+// Route::get('/test', function () {
+//     return view('test');
+// });
 
 // Food Packaging Material
 Route::get('food-packaging-material', function () {
@@ -67,8 +67,8 @@ Route::post('food-type-for-production/calculation/ftopsis', [FTOPSISCalculationC
 // Route::get('fahp/create', [FAHPCalculationController::class, 'create'])->name('fahp.create');
 // Route::post('fahp', [FAHPCalculationController::class, 'store'])->name('fahp.store');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+// require __DIR__.'/auth.php';
