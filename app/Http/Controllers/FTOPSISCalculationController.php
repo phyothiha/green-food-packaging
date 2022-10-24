@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MaterialType;
 use Illuminate\Http\Request;
 use App\Services\FTOPSISService;
 
@@ -20,7 +21,11 @@ class FTOPSISCalculationController extends Controller
 
         $input = $request->only(['type']);
 
+        $material_type = MaterialType::where('type', $material)->get();
+        $material_type_package_material = $material_type->pluck('package_material');
+
         return view('ftopsis.result', [
+            'tbl_key' => $material_type_package_material,
             'material' => $material['material'],
             'step_2' => $this->ftopsis_service->step_2($material, $input['type']),
             'step_3' => $this->ftopsis_service->step_3(),

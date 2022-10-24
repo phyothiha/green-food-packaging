@@ -59,7 +59,7 @@
         <h3 class="mb-4 text-xl">Step 6: Calculate the fuzzy Positive Ideal Solution(FPIS) and Fuzzy Negative Ideal Solution(FNIS)</h3>
 
         <div class="overflow-x-scroll lg:overflow-auto">
-            <x-ftopsis.result.table :collection="$step_6" />
+            <x-ftopsis.result.step6 :collection="$step_6" />
         </div>
     </div>
 
@@ -90,7 +90,7 @@
         <h3 class="mb-4 text-xl">Step 8: Calculate the closeness coefficient for each alternative above the equation</h3>
 
         <div class="overflow-x-scroll lg:overflow-auto">
-            <x-ftopsis.result.step8 :collection="$step_8" />
+            <x-ftopsis.result.step8 :collection="$step_8" :tbl_key="$tbl_key" />
         </div>
     </div>
 
@@ -105,8 +105,23 @@
 
 @push('scripts')
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        document.getElementById('back-button').href = "{{ route('food-type-for-production.calculation') }}?q=" + localStorage.getItem('selectedMaterialType');
-    });
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('back-button').href = "{{ route('food-type-for-production.calculation') }}?q=" + localStorage.getItem('selectedMaterialType');
+
+    if (JSON.parse(localStorage.getItem('selectedPackageMaterial')).length) {
+        const tables = document.querySelectorAll('.table-result')
+        const storageItem = localStorage.getItem('selectedPackageMaterial');
+
+        Array.from(tables, (element, index) => {
+            let trCollection = element.querySelector('tbody').children
+
+            for (tr of trCollection) {
+                if (! storageItem.includes(tr.dataset.id)) {
+                    tr.classList.add('hidden')
+                }
+            }
+        })
+    }
+});
 </script>
 @endpush

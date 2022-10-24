@@ -63,6 +63,7 @@ class FoodTypeForProductionController extends Controller
 
         return view('food-type-for-production.calculation', [
             'ftopsis_data' => $ftopsis_data,
+            'material_type_package_material' => $material_type_package_material,
             // 'ftopsis_data' => [
             //     'Glass' => [
             //         'cost' => ['cost_glass', 'cost_glass', 'cost_glass'],

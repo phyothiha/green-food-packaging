@@ -115,6 +115,10 @@ document.addEventListener('DOMContentLoaded', function () {
         selectedMaterialTypeDiv.classList.remove('hidden')
         selectedMaterialTypeDiv.innerHTML = `Selected Food: <b>${targetValue}</b>`
 
+        if (localStorage.getItem('selectedPackageMaterial')) {
+            localStorage.removeItem('selectedPackageMaterial')
+        }
+
         errorMessageDiv.classList.add('hidden')
         localStorage.setItem('selectedMaterialType', targetValue)
     })

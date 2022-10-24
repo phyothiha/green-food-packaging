@@ -31,7 +31,6 @@
                         </select>
                     </td>
                 @endforeach
-
             </tr>
         @endforeach
     </tbody>

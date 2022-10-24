@@ -459,23 +459,47 @@ class FTOPSISService
                 switch ($key) {
                     case 0:
                         $result[$pkg][] = MaterialTypeLScale::where([ ['type', $material], ['package_material', $pkg], ])->first()?->package_material;
-                        $result[$pkg][] = MaterialCostLScale::where([ ['cost', $attr], ['package_material', $pkg], ])->first()?->cost;
+                        // $result[$pkg][] = MaterialCostLScale::where([ ['cost', $attr], ['package_material', $pkg], ])->first()?->cost;
                         break;
-                    case 1:
-                        $result[$pkg][] = MaterialEnvironmentalImpactLScale::where([ ['impact', $attr], ['package_material', $pkg], ])->first()?->impact;
-                        break;
-                    case 2:
-                        $result[$pkg][] = MaterialConsumerMarketingIssueLScale::where([ ['issue', $attr], ['package_material', $pkg], ])->first()?->issue;
-                        break;
-                    case 3:
-                        $result[$pkg][] = MaterialPropertiesLScale::where([ ['property', $attr], ['package_material', $pkg], ])->first()?->property;
-                        break;
+                    // case 1:
+                    //     $result[$pkg][] = MaterialEnvironmentalImpactLScale::where([ ['impact', $attr], ['package_material', $pkg], ])->first()?->impact;
+                    //     break;
+                    // case 2:
+                    //     $result[$pkg][] = MaterialConsumerMarketingIssueLScale::where([ ['issue', $attr], ['package_material', $pkg], ])->first()?->issue;
+                    //     break;
+                    // case 3:
+                    //     $result[$pkg][] = MaterialPropertiesLScale::where([ ['property', $attr], ['package_material', $pkg], ])->first()?->property;
+                    //     break;
                 }
             }
         }
 
         foreach ($keys as $key => $value) {
             $result[$value][] = $this->ranking[$key];
+
+            switch ($this->ranking[$key]) {
+                case 1:
+                    $result[$value][] = 'a';
+                    break;
+                case 2:
+                    $result[$value][] = 'b';
+                    break;
+                case 3:
+                    $result[$value][] = 'c';
+                    break;
+                case 4:
+                    $result[$value][] = 'd';
+                    break;
+                case 5:
+                    $result[$value][] = 'e';
+                    break;
+                case 6:
+                    $result[$value][] = 'f';
+                    break;
+                case 7:
+                    $result[$value][] = 'g';
+                    break;
+            }
         }
 
         return $result;

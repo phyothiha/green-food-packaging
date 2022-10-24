@@ -15,6 +15,10 @@
         </a>
     </div>
 
+    <div>
+        <x-selected-food-type :materials="$material_type_package_material"></x-selected-food-type>
+    </div>
+
     <nav class="text-center mb-14">
         <h3 class="mb-6 text-2xl">Select a Calculation</h3>
 
