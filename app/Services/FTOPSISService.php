@@ -35,31 +35,53 @@ class FTOPSISService
     public $gl_step8_d_minus_result = [];
     public $ranking = [];
 
-    public function step_2($material, $collection)
+    public function step_2($material, $collection, $unselectedPackageMaterial)
     {
         $result = [];
 
         foreach ($collection as $pkg => $fl_collection) {
-            foreach ($fl_collection as $key => $attr) {
-                switch ($key) {
-                    case 0:
-                        $result[$pkg][] = MaterialTypeLScale::where([ ['type', $material], ['package_material', $pkg], ])->first()?->scale;
-                        $result[$pkg][] = MaterialCostLScale::where([ ['cost', $attr], ['package_material', $pkg], ])->first()?->scale;
-                        break;
-                    case 1:
-                        $result[$pkg][] = MaterialEnvironmentalImpactLScale::where([ ['impact', $attr], ['package_material', $pkg], ])->first()?->scale;
-                        break;
-                    case 2:
-                        $result[$pkg][] = MaterialConsumerMarketingIssueLScale::where([ ['issue', $attr], ['package_material', $pkg], ])->first()?->scale;
-                        break;
-                    case 3:
-                        $result[$pkg][] = MaterialPropertiesLScale::where([ ['property', $attr], ['package_material', $pkg], ])->first()?->scale;
-                        break;
+            if ($unselectedPackageMaterial && in_array($pkg, $unselectedPackageMaterial)) {
+                foreach ($fl_collection as $key => $attr) {
+                    switch ($key) {
+                        case 0:
+                            $result[$pkg][] = MaterialTypeLScale::where([ ['type', $material], ['package_material', $pkg], ])->first()?->scale;
+                            $result[$pkg][] = MaterialCostLScale::where('package_material', $pkg)->orderBy('scale', 'desc')->first()?->scale;
+                            break;
+                        case 1:
+                            $result[$pkg][] = MaterialEnvironmentalImpactLScale::where('package_material', $pkg)->orderBy('scale', 'desc')->first()?->scale;
+                            break;
+                        case 2:
+                            $result[$pkg][] = MaterialConsumerMarketingIssueLScale::where('package_material', $pkg)->orderBy('scale', 'desc')->first()?->scale;
+                            break;
+                        case 3:
+                            $result[$pkg][] = MaterialPropertiesLScale::where('package_material', $pkg)->orderBy('scale', 'desc')->first()?->scale;
+                            break;
+                    }
+                }
+            } else {
+                foreach ($fl_collection as $key => $attr) {
+                    switch ($key) {
+                        case 0:
+                            $result[$pkg][] = MaterialTypeLScale::where([ ['type', $material], ['package_material', $pkg], ])->first()?->scale;
+                            $result[$pkg][] = MaterialCostLScale::where([ ['cost', $attr], ['package_material', $pkg], ])->first()?->scale;
+                            break;
+                        case 1:
+                            $result[$pkg][] = MaterialEnvironmentalImpactLScale::where([ ['impact', $attr], ['package_material', $pkg], ])->first()?->scale;
+                            break;
+                        case 2:
+                            $result[$pkg][] = MaterialConsumerMarketingIssueLScale::where([ ['issue', $attr], ['package_material', $pkg], ])->first()?->scale;
+                            break;
+                        case 3:
+                            $result[$pkg][] = MaterialPropertiesLScale::where([ ['property', $attr], ['package_material', $pkg], ])->first()?->scale;
+                            break;
+                    }
                 }
             }
         }
 
         $this->gl_result = $result;
+
+
 
         return $result;
     }
@@ -154,15 +176,15 @@ class FTOPSISService
                     $val2_deno = explode('/', $val2)[1];
                     $val3_deno = explode('/', $val3)[1];
 
-                    $val1 = round((float) $val1/$val1_deno, 3);
-                    $val2 = round((float) $val2/$val2_deno, 3);
-                    $val3 = round((float) $val3/$val3_deno, 3);
+                    $val1 = round((float) $val1/$val1_deno, 6);
+                    $val2 = round((float) $val2/$val2_deno, 6);
+                    $val3 = round((float) $val3/$val3_deno, 6);
                 } else {
                     [$val1, $val2, $val3] = explode(',', $item);
 
-                    $val1 = round((float) $val1/$this->gl_step3_find_min_max[$key], 3);
-                    $val2 = round((float) $val2/$this->gl_step3_find_min_max[$key], 3);
-                    $val3 = round((float) $val3/$this->gl_step3_find_min_max[$key], 3);
+                    $val1 = round((float) $val1/$this->gl_step3_find_min_max[$key], 6);
+                    $val2 = round((float) $val2/$this->gl_step3_find_min_max[$key], 6);
+                    $val3 = round((float) $val3/$this->gl_step3_find_min_max[$key], 6);
                 }
 
                 $format = '%s,%s,%s';
@@ -231,9 +253,9 @@ class FTOPSISService
                 $val2_rhs = (float) explode('*', $val2)[1];
                 $val3_rhs = (float) explode('*', $val3)[1];
 
-                $val1 = round($val1_lhs * $val1_rhs, 3);
-                $val2 = round($val2_lhs * $val2_rhs, 3);
-                $val3 = round($val3_lhs * $val3_rhs, 3);
+                $val1 = round($val1_lhs * $val1_rhs, 6);
+                $val2 = round($val2_lhs * $val2_rhs, 6);
+                $val3 = round($val3_lhs * $val3_rhs, 6);
 
                 $format = '%s,%s,%s';
                 $result[$name_key][] = sprintf($format, $val1, $val2, $val3);
@@ -275,7 +297,7 @@ class FTOPSISService
             }
         }
 
-        // dd($result);
+        //
 
         foreach ($result as $name_key => $collection) {
             foreach ($collection as $collection_key => $item) {
@@ -298,7 +320,7 @@ class FTOPSISService
 
         // die();
 
-        // dd($result_temp);
+        //
 
         // A*
         foreach ($result_temp as $collection) {
@@ -348,7 +370,7 @@ class FTOPSISService
                             pow(($c1 - (float) $c2), 2)
                         )
                     )
-                    , 4
+                    , 6
                 );
             }
         }
@@ -375,7 +397,7 @@ class FTOPSISService
                             pow(($c1 - (float) $c2), 2)
                         )
                     )
-                    , 4
+                    , 6
                 );
             }
         }
@@ -424,7 +446,7 @@ class FTOPSISService
         foreach ($this->gl_step8_d_star_result as $key => $value) {
             $r = round(
                 $this->gl_step8_d_minus_result[$key] / ($this->gl_step8_d_minus_result[$key] + $value),
-                2
+                6
             );
             $result[$key][] = $r;
             $to_rank[] = $r;

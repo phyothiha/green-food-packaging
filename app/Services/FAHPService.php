@@ -241,7 +241,7 @@ class FAHPService
 
             foreach ($addition as $index => $value) {
                 // $addition[$index] = array_sum($value);
-                $addition[$index] = round(array_sum($value), 3); // need to ask again
+                $addition[$index] = round(array_sum($value), 6); // need to ask again
             }
 
 
@@ -274,7 +274,7 @@ class FAHPService
         }
 
         foreach ($lmu_values as $index => $value) {
-            $lmu_values[$index] = round(array_sum($value), 3);
+            $lmu_values[$index] = round(array_sum($value), 6);
         }
 
         foreach ($mean_value as $key => $value) {
@@ -284,9 +284,9 @@ class FAHPService
             [$val1, $val2, $val3] = explode(',', $mean_value[$key][0]);
             [$lower, $middle, $upper] = $lmu_values;
 
-            $seg1 = round((float) $val1/$lower, 3);
-            $seg2 = round((float) $val2/$middle, 3);
-            $seg3 = round((float) $val3/$upper, 3);
+            $seg1 = round((float) $val1/$lower, 6);
+            $seg2 = round((float) $val2/$middle, 6);
+            $seg3 = round((float) $val3/$upper, 6);
 
             $mean_value[$key][] = $seg1 . ',' . $seg2 . ',' . $seg3;
 

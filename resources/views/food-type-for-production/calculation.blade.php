@@ -15,10 +15,6 @@
         </a>
     </div>
 
-    <div>
-        <x-selected-food-type :materials="$material_type_package_material"></x-selected-food-type>
-    </div>
-
     <nav class="text-center mb-14">
         <h3 class="mb-6 text-2xl">Select a Calculation</h3>
 
@@ -40,6 +36,10 @@
             </li>
         </ul>
     </nav>
+
+    <div>
+        <x-selected-food-type :materials="$material_type_package_material"></x-selected-food-type>
+    </div>
 
     {{-- fahp --}}
     <div x-show="tab == 'fahp'">
@@ -230,7 +230,7 @@
             FTOPSIS Selection Table for "{{ request()->q }}"
         </h3>
 
-        <form action="{{ route('food-type-for-production.calculation.ftopsis.store') }}" method="POST" class="">
+        <form action="{{ route('food-type-for-production.calculation.ftopsis.store') }}" method="POST" class="" id="ftopsis-form">
             @csrf
             <input type="hidden" name="material" value="{{ request()->q }}">
             <x-ftopsis.calculation-table :collection="$ftopsis_data"></x-ftopsis.calculation-table>

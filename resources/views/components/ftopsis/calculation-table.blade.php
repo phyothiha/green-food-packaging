@@ -2,7 +2,13 @@
     'collection'
 ])
 
-<table class="w-full mb-10 overflow-hidden text-sm rounded-lg shadow-lg">
+<div id="ftopsis_selectedPackageMaterial">
+    {{-- <div>testing</div>
+    <div>123</div> --}}
+</div>
+
+
+<table class="w-full mb-10 overflow-hidden text-sm rounded-lg shadow-lg" id="ftopsis-calculation-table">
     <thead class="text-white bg-teal-600">
         <tr>
             <th class="p-4">Type of Materials</th>
@@ -14,7 +20,7 @@
     </thead>
     <tbody>
         @foreach ($collection as $fl_key => $fl_collection)
-            <tr class="text-xs odd:bg-white even:bg-gray-50">
+            <tr class="text-xs odd:bg-white even:bg-gray-50" data-id="{{ $fl_key }}">
 
                 <td class="p-4">
                     {{ $fl_key }}
@@ -35,3 +41,51 @@
         @endforeach
     </tbody>
 </table>
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const ftopsis_form = document.getElementById('ftopsis-form');
+    const inputsNode = document.getElementById('ftopsis_selectedPackageMaterial')
+    const ftopsis_tbl_trCollection = document.querySelector('#ftopsis-calculation-table tbody').children;
+
+    if (localStorage.getItem('defaultSelectedPackageMaterial')) {
+        localStorage.removeItem('defaultSelectedPackageMaterial')
+    }
+
+    let result = [];
+
+    for (ftopsis_tr of ftopsis_tbl_trCollection) {
+        result.push(ftopsis_tr.dataset.id)
+    }
+
+    localStorage.setItem('defaultSelectedPackageMaterial', JSON.stringify(result))
+
+    ftopsis_form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        while (inputsNode.firstChild) {
+            inputsNode.removeChild(inputsNode.firstChild);
+        }
+
+        if (localStorage.getItem('selectedPackageMaterial')) {
+            const spm = JSON.parse(localStorage.getItem('selectedPackageMaterial'));
+            const defaultSelected = JSON.parse(localStorage.getItem('defaultSelectedPackageMaterial'))
+            if (spm.length) {
+                const max_filter = defaultSelected.filter(x => !spm.includes(x))
+
+                max_filter.forEach(el => {
+                    const newHiddenInput = document.createElement('input')
+                    newHiddenInput.type = 'hidden'
+                    newHiddenInput.name = 'unselectedPackageMaterial[]'
+                    newHiddenInput.value = el
+                    inputsNode.appendChild(newHiddenInput);
+                })
+            }
+        }
+
+        ftopsis_form.submit();
+    })
+})
+</script>
+@endpush

@@ -32,15 +32,28 @@
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    const storageItem = localStorage.getItem('selectedPackageMaterial');
+    const storageItem = localStorage.getItem('selectedPackageMaterial') ? JSON.parse(localStorage.getItem('selectedPackageMaterial')) : [];
+    const ftopsis_tbl_trCollection = document.querySelector('#ftopsis-calculation-table tbody').children;
 
     let trCollection = document.querySelector('#package-material tbody').children
 
-    if (storageItem) {
+    if (storageItem.length != 0) {
         for (tr of trCollection) {
             if (storageItem.includes(tr.dataset.id)) {
                 tr.querySelector('input').checked = true
             }
+        }
+
+        for (ftopsis_tr of ftopsis_tbl_trCollection) {
+            if (storageItem.includes(ftopsis_tr.dataset.id)) {
+                ftopsis_tr.classList.remove('hidden')
+            } else {
+                ftopsis_tr.classList.add('hidden')
+            }
+        }
+    } else {
+        for (ftopsis_tr of ftopsis_tbl_trCollection) {
+            ftopsis_tr.classList.remove('hidden')
         }
     }
 
@@ -67,6 +80,22 @@ document.addEventListener('DOMContentLoaded', function () {
             let elements = [];
             elements.push(targetValue);
             localStorage.setItem('selectedPackageMaterial', JSON.stringify(elements))
+        }
+
+        let elements = JSON.parse(localStorage.getItem('selectedPackageMaterial'))
+
+        for (ftopsis_tr of ftopsis_tbl_trCollection) {
+            if (elements.includes(ftopsis_tr.dataset.id)) {
+                ftopsis_tr.classList.remove('hidden')
+            } else {
+                ftopsis_tr.classList.add('hidden')
+            }
+        }
+
+        if (elements.length == 0) {
+            for (ftopsis_tr of ftopsis_tbl_trCollection) {
+                ftopsis_tr.classList.remove('hidden')
+            }
         }
     })
 }, false)

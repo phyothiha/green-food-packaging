@@ -17,17 +17,22 @@ class FTOPSISCalculationController extends Controller
 
     public function store(Request $request)
     {
-        $material = $request->only(['material']);
+        $material = $request->input(['material']);
 
-        $input = $request->only(['type']);
+        $input = $request->input(['type']);
+
+        $unselectedPackageMaterial = $request->input(['unselectedPackageMaterial']);
 
         $material_type = MaterialType::where('type', $material)->get();
         $material_type_package_material = $material_type->pluck('package_material');
 
+        // dd($material, $input, $unselectedPackageMaterial, $material_type_package_material);
+        // dd($unselectedPackageMaterial);
+
         return view('ftopsis.result', [
             'tbl_key' => $material_type_package_material,
-            'material' => $material['material'],
-            'step_2' => $this->ftopsis_service->step_2($material, $input['type']),
+            'material' => $material,
+            'step_2' => $this->ftopsis_service->step_2($material, $input, $unselectedPackageMaterial),
             'step_3' => $this->ftopsis_service->step_3(),
             'step_4' => $this->ftopsis_service->step_4(),
             'step_4_cal' => $this->ftopsis_service->step_4_cal(),
@@ -39,7 +44,7 @@ class FTOPSISCalculationController extends Controller
             'step_7_d_star_result' => $this->ftopsis_service->step_7_d_star_result(),
             'step_7_d_minus_result' => $this->ftopsis_service->step_7_d_minus_result(),
             'step_8' => $this->ftopsis_service->step_8(),
-            'tbl' =>  $this->ftopsis_service->ranking($material, $input['type']),
+            'tbl' =>  $this->ftopsis_service->ranking($material, $input),
         ]);
     }
 }

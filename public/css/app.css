@@ -858,6 +858,9 @@ select {
 .table {
   display: table;
 }
+.table-cell {
+  display: table-cell;
+}
 .grid {
   display: grid;
 }
@@ -1387,13 +1390,13 @@ select {
   font-size: 1.25rem;
   line-height: 1.75rem;
 }
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
-}
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 .text-lg {
   font-size: 1.125rem;
@@ -1495,14 +1498,6 @@ select {
 .text-indigo-700 {
   --tw-text-opacity: 1;
   color: rgb(67 56 202 / var(--tw-text-opacity));
-}
-.text-pink-500 {
-  --tw-text-opacity: 1;
-  color: rgb(236 72 153 / var(--tw-text-opacity));
-}
-.text-blue-500 {
-  --tw-text-opacity: 1;
-  color: rgb(59 130 246 / var(--tw-text-opacity));
 }
 .underline {
   text-decoration-line: underline;

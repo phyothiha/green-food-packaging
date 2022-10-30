@@ -16,9 +16,9 @@ class CreateFahpFuzzyWeightsTable extends Migration
         Schema::create('fahp_fuzzy_weights', function (Blueprint $table) {
             $table->id();
             $table->string('type');
-            $table->double('seg1', 8, 4);
-            $table->double('seg2', 8, 4);
-            $table->double('seg3', 8, 4);
+            $table->double('seg1', 8, 6);
+            $table->double('seg2', 8, 6);
+            $table->double('seg3', 8, 6);
         });
     }
 
