@@ -13,21 +13,178 @@
     </a>
 </div>
 
-    <div class="mb-12">
-        <h3 class="mb-4 text-xl">Material "{{ $material }}" Ranking (FAHP - FTOPSIS)</h3>
+    {{-- mix --}}
+
+    {{-- <div class="mb-12">
+        <h3 class="mb-4 text-xl">Step 2: </h3>
 
         <div class="overflow-x-scroll lg:overflow-auto">
-            <x-ftopsis.result.final-rank-table :collection="$tbl" />
+            <x-ftopsis.result.table :collection="$step_2" />
         </div>
     </div>
 
     <div class="mb-12">
-        <h3 class="mb-4 text-xl">Material "{{ $material }}" Ranking (PURE FTOPSIS)</h3>
+        <h3 class="mb-4 text-xl">Step 3: </h3>
 
         <div class="overflow-x-scroll lg:overflow-auto">
-            <x-ftopsis.result.final-rank-table :collection="$tbl" />
+            <x-ftopsis.result.table :collection="$step_3" />
         </div>
     </div>
+
+    <div class="mb-12">
+        <h3 class="mb-4 text-xl">Step 4: </h3>
+
+        <div class="overflow-x-scroll lg:overflow-auto">
+            <x-ftopsis.result.table :collection="$step_4" />
+            <x-ftopsis.result.table class="mt-5" :collection="$step_4_cal" />
+        </div>
+    </div>
+
+    <div class="mb-12">
+        <h3 class="mb-4 text-xl">Step 5: </h3>
+
+        <div class="overflow-x-scroll lg:overflow-auto">
+            <x-ftopsis.result.table :collection="$step_5" />
+            <x-ftopsis.result.table class="mt-5" :collection="$step_5_cal" />
+        </div>
+    </div>
+
+    <div class="mb-12">
+        <h3 class="mb-4 text-xl">Step 6: Calculate the fuzzy Positive Ideal Solution(FPIS) and Fuzzy Negative Ideal Solution(FNIS)</h3>
+
+        <div class="overflow-x-scroll lg:overflow-auto">
+            <x-ftopsis.result.step6 :collection="$step_6" />
+        </div>
+    </div>
+
+    <div class="mb-12">
+        <h3 class="mb-4 text-xl">Step 7: Calculate the distance value from each alternative to the FPIS and to the FNIS</h3>
+
+        <div class="space-y-5 overflow-x-scroll lg:overflow-auto">
+            <div>
+                <h3 class="mb-3 text-lg">A <sup>*</sup> result</h3>
+                <x-ftopsis.result.table :collection="$step_7_a_star_result" />
+            </div>
+            <div>
+                <h3 class="mb-3 text-lg">A <sup>-</sup> result</h3>
+                <x-ftopsis.result.table class="mt-5" :collection="$step_7_a_minus_result" />
+            </div>
+            <div>
+                <h3 class="mb-3 text-lg">d <sup>*</sup> result</h3>
+                <x-ftopsis.result.d :collection="$step_7_d_star_result" name="d" sign="*" />
+            </div>
+            <div>
+                <h3 class="mb-3 text-lg">d <sup>-</sup> result</h3>
+                <x-ftopsis.result.d class="mt-5" :collection="$step_7_d_minus_result" name="d" sign="-" />
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-12">
+        <h3 class="mb-4 text-xl">Step 8: Calculate the closeness coefficient for each alternative above the equation</h3>
+
+        <div class="overflow-x-scroll lg:overflow-auto">
+            <x-ftopsis.result.step8 :collection="$step_8" :tbl_key="$tbl_key" />
+        </div>
+    </div> --}}
+
+    <div x-data="{
+        isShow: false
+    }">
+        <div class="">
+            <h3 class="mb-4 text-xl">Material "{{ $material }}" Ranking (FAHP - FTOPSIS)</h3>
+
+            <div class="overflow-x-scroll lg:overflow-auto">
+                <x-ftopsis.result.final-rank-table :collection="$tbl" />
+            </div>
+        </div>
+
+        <button class="p-3 my-5 text-xs text-gray-500 transition duration-300 ease-in-out bg-blue-200 rounded-lg hover:bg-blue-500 hover:text-gray-50" x-on:click="isShow = !isShow">Compare with FTOPSIS weight</button>
+
+        <div class="mb-12" x-show="isShow">
+            <h3 class="mb-4 text-xl">Material "{{ $material }}" Ranking (FTOPSIS)</h3>
+
+            <div class="overflow-x-scroll lg:overflow-auto">
+                <x-ftopsis.result.final-rank-table :collection="$pure_ftopsis" />
+            </div>
+        </div>
+    </div>
+
+    {{-- pure --}}
+    {{-- <div class="mb-12">
+        <h3 class="mb-4 text-xl">Step 2: </h3>
+
+        <div class="overflow-x-scroll lg:overflow-auto">
+            <x-ftopsis.result.table :collection="$pure_step_2" />
+        </div>
+    </div>
+
+      <div class="mb-12">
+        <h3 class="mb-4 text-xl">Step 3: </h3>
+
+        <div class="overflow-x-scroll lg:overflow-auto">
+            <x-ftopsis.result.table :collection="$pure_step_3" />
+        </div>
+      </div>
+
+      <div class="mb-12">
+        <h3 class="mb-4 text-xl">Step 4: </h3>
+
+        <div class="overflow-x-scroll lg:overflow-auto">
+            <x-ftopsis.result.table :collection="$pure_step_4" />
+            <x-ftopsis.result.table class="mt-5" :collection="$pure_step_4_cal" />
+        </div>
+      </div>
+
+      <div class="mb-12">
+        <h3 class="mb-4 text-xl">Step 5: </h3>
+
+        <div class="overflow-x-scroll lg:overflow-auto">
+            <x-ftopsis.result.table :collection="$pure_step_5" />
+            <x-ftopsis.result.table class="mt-5" :collection="$pure_step_5_cal" />
+        </div>
+      </div>
+
+      <div class="mb-12">
+        <h3 class="mb-4 text-xl">Step 6: Calculate the fuzzy Positive Ideal Solution(FPIS) and Fuzzy Negative Ideal Solution(FNIS)</h3>
+
+        <div class="overflow-x-scroll lg:overflow-auto">
+            <x-ftopsis.result.step6 :collection="$pure_step_6" />
+        </div>
+      </div>
+
+      <div class="mb-12">
+        <h3 class="mb-4 text-xl">Step 7: Calculate the distance value from each alternative to the FPIS and to the FNIS</h3>
+
+        <div class="space-y-5 overflow-x-scroll lg:overflow-auto">
+            <div>
+                <h3 class="mb-3 text-lg">A <sup>*</sup> result</h3>
+                <x-ftopsis.result.table :collection="$pure_step_7_a_star_result" />
+            </div>
+            <div>
+                <h3 class="mb-3 text-lg">A <sup>-</sup> result</h3>
+                <x-ftopsis.result.table class="mt-5" :collection="$pure_step_7_a_minus_result" />
+            </div>
+            <div>
+                <h3 class="mb-3 text-lg">d <sup>*</sup> result</h3>
+                <x-ftopsis.result.d :collection="$pure_step_7_d_star_result" name="d" sign="*" />
+            </div>
+            <div>
+                <h3 class="mb-3 text-lg">d <sup>-</sup> result</h3>
+                <x-ftopsis.result.d class="mt-5" :collection="$pure_step_7_d_minus_result" name="d" sign="-" />
+            </div>
+        </div>
+      </div>
+
+      <div class="mb-12">
+        <h3 class="mb-4 text-xl">Step 8: Calculate the closeness coefficient for each alternative above the equation</h3>
+
+        <div class="overflow-x-scroll lg:overflow-auto">
+            <x-ftopsis.result.step8 :collection="$pure_step_8" :tbl_key="$tbl_key" />
+        </div>
+      </div> --}}
+
+
 @endsection
 
 @push('scripts')
