@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Controllers\FAHPCalculationController;
-use App\Http\Controllers\FoodTypeForProductionController;
-use App\Http\Controllers\FTOPSISCalculationController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FAHPCalculationController;
+use App\Http\Controllers\FTOPSISCalculationController;
+use App\Http\Controllers\FoodTypeForProductionController;
+use App\Http\Controllers\FAHPFTOPSISCalculationController;
+use App\Http\Controllers\FoodTypeForProductionControllerTwo;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +62,9 @@ Route::post('food-type-for-production/calculation/fahp', [FAHPCalculationControl
 
 Route::post('food-type-for-production/calculation/ftopsis', [FTOPSISCalculationController::class, 'store'])
     ->name('food-type-for-production.calculation.ftopsis.store');
+
+Route::post('food-type-for-production/calculation/fahp-ftopsis', [FAHPFTOPSISCalculationController::class, 'store'])
+    ->name('food-type-for-production.calculation.fahp-ftopsis.store');
 
 // Route::get('/fahp', function () {
 //     return view('fahp.index');

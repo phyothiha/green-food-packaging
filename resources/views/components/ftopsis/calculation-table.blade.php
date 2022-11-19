@@ -2,10 +2,7 @@
     'collection'
 ])
 
-<div id="ftopsis_selectedPackageMaterial">
-    {{-- <div>testing</div>
-    <div>123</div> --}}
-</div>
+<div id="ftopsis_selectedPackageMaterial"></div>
 
 
 <table class="w-full mb-10 overflow-hidden text-sm rounded-lg shadow-lg" id="ftopsis-calculation-table">
@@ -28,7 +25,7 @@
 
                 @foreach ($fl_collection as $sl_key => $sl_collection)
                     <td class="p-4">
-                        <select class="w-full text-xs border-gray-200 rounded-lg appearance-none" name="type[{{$fl_key}}][]">
+                        <select class="w-full text-xs border-gray-200 rounded-lg appearance-none" name="type[ftopsis][{{$fl_key}}][]">
                             @foreach ($sl_collection as $item)
                                 <option value="{{ $item }}">
                                     {{ $item }}
@@ -45,7 +42,7 @@
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    const ftopsis_form = document.getElementById('ftopsis-form');
+    const form = document.getElementById('form');
     const inputsNode = document.getElementById('ftopsis_selectedPackageMaterial')
     const ftopsis_tbl_trCollection = document.querySelector('#ftopsis-calculation-table tbody').children;
 
@@ -61,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     localStorage.setItem('defaultSelectedPackageMaterial', JSON.stringify(result))
 
-    ftopsis_form.addEventListener('submit', function (e) {
+    form.addEventListener('submit', function (e) {
         e.preventDefault();
 
         while (inputsNode.firstChild) {
@@ -84,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        ftopsis_form.submit();
+        form.submit();
     })
 })
 </script>
