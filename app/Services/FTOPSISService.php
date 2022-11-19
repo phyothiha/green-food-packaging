@@ -501,25 +501,31 @@ class FTOPSISService
 
             switch ($this->ranking[$key]) {
                 case 1:
-                    $result[$value][] = 'a';
+                    $result[$value][] = 'Extremely  more important to become Green Environment';
                     break;
                 case 2:
-                    $result[$value][] = 'b';
+                    $result[$value][] = 'Very Strongly to extremely more important to become Green Environment';
                     break;
                 case 3:
-                    $result[$value][] = 'c';
+                    $result[$value][] = 'Very Strongly more important to become Green Environment';
                     break;
                 case 4:
-                    $result[$value][] = 'd';
+                    $result[$value][] = 'Very Strongly important to become Green Environment';
                     break;
                 case 5:
-                    $result[$value][] = 'e';
+                    $result[$value][] = 'Stronly more important to become Green Environment';
                     break;
                 case 6:
-                    $result[$value][] = 'f';
+                    $result[$value][] = 'Moderately to more strongly to become Green Environment';
                     break;
                 case 7:
-                    $result[$value][] = 'g';
+                    $result[$value][] = 'Moderately more important to become Green Environment';
+                    break;
+                case 8:
+                    $result[$value][] = 'More than equally to become Green Environment';
+                    break;
+                case 9:
+                    $result[$value][] = 'Equally Important to become Green Environment';
                     break;
             }
         }
