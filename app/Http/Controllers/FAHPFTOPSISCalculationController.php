@@ -33,44 +33,6 @@ class FAHPFTOPSISCalculationController extends Controller
         $material_type = MaterialType::where('type', $material)->get();
         $material_type_package_material = $material_type->pluck('package_material');
 
-        // $this->ftopsis_service->step_2($material, $input, $unselectedPackageMaterial);
-        // $this->ftopsis_service->step_3();
-        // $this->ftopsis_service->step_4();
-        // $this->ftopsis_service->step_4_cal();
-        // $step_5 = $this->ftopsis_service->step_5();
-        // $step_5_cal = $this->ftopsis_service->step_5_cal();
-        // $this->ftopsis_service->step_6();
-        // $this->ftopsis_service->step_7_a_star_result();
-        // $this->ftopsis_service->step_7_a_minus_result();
-        // $this->ftopsis_service->step_7_d_star_result();
-        // $this->ftopsis_service->step_7_d_minus_result();
-        // $this->ftopsis_service->step_8();
-        // $fahp_ftopsis = $this->ftopsis_service->ranking($material, $input);
-
-        // FTOPSIS without FAHP weight calculations
-        // $this->ftopsis_service->pure_step_2($material, $input, $unselectedPackageMaterial);
-        // $this->ftopsis_service->pure_step_3();
-        // $this->ftopsis_service->pure_step_4();
-        // $this->ftopsis_service->pure_step_4_cal();
-        // $pure_step_5 = $this->ftopsis_service->pure_step_5($type);
-        // $pure_step_5_cal = $this->ftopsis_service->pure_step_5_cal();
-        // $this->ftopsis_service->pure_step_6();
-        // $this->ftopsis_service->pure_step_7_a_star_result();
-        // $this->ftopsis_service->pure_step_7_a_minus_result();
-        // $this->ftopsis_service->pure_step_7_d_star_result();
-        // $this->ftopsis_service->pure_step_7_d_minus_result();
-        // $this->ftopsis_service->pure_step_8();
-        // $pure_ftopsis = $this->ftopsis_service->pure_ranking($material, $input);
-
-        // return view('fahp-ftopsis.result', [
-        //     'material' => $material,
-        //     'step_5' => $step_5,
-        //     'step_5_cal' => $step_5_cal,
-        //     'tbl' =>  $fahp_ftopsis,
-        //     'pure_ftopsis_step_5' => $pure_step_5,
-        //     'pure_ftopsis_step_5_cal' => $pure_step_5_cal,
-        //     'pure_ftopsis' => $pure_ftopsis,
-        // ]);
 
         return view('fahp-ftopsis.result', [
             'tbl_key' => $material_type_package_material,

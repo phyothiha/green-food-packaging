@@ -92,14 +92,31 @@
         isShow: false
     }">
         <div class="">
-            <h3 class="mb-4 text-xl">Material "{{ $material }}" Ranking (FAHP - FTOPSIS)</h3>
+            <h3 class="mb-4 text-xl">Material "{{ $material }}" Ranking</h3>
 
             <div class="overflow-x-scroll lg:overflow-auto">
-                <x-ftopsis.result.final-rank-table :collection="$tbl" />
+                <x-ftopsis.result.final-rank-table :collection="$tbl['res']" />
+
+                <div id="messages">
+                    @foreach ($tbl['ranking'] as $key => $rank)
+                        @if ($rank !== 1)
+                            <div class="p-3 mt-3 text-sm text-center rounded-lg bg-slate-300" data-id="{{ $key }}">
+                                {{ $key }} is rank {{ $rank }}
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+                @foreach ($tbl['ranking'] as $key => $rank)
+                    @if ($rank == 1)
+                        <div class="p-3 mt-3 text-sm text-center bg-yellow-300 rounded-lg">
+                            {{ $key }} is more suitable for reducing environmental impact
+                        </div>
+                    @endif
+                @endforeach
             </div>
         </div>
 
-        <button class="p-3 my-5 text-xs text-gray-500 transition duration-300 ease-in-out bg-blue-200 rounded-lg hover:bg-blue-500 hover:text-gray-50" x-on:click="isShow = !isShow">Compare with FTOPSIS weight</button>
+        {{-- <button class="hidden p-3 my-5 text-xs text-gray-500 transition duration-300 ease-in-out bg-blue-200 rounded-lg hover:bg-blue-500 hover:text-gray-50" x-on:click="isShow = !isShow">Compare with FTOPSIS weight</button>
 
         <div class="mb-12" x-show="isShow">
             <h3 class="mb-4 text-xl">Material "{{ $material }}" Ranking (FTOPSIS)</h3>
@@ -107,7 +124,7 @@
             <div class="overflow-x-scroll lg:overflow-auto">
                 <x-ftopsis.result.final-rank-table :collection="$pure_ftopsis" />
             </div>
-        </div>
+        </div> --}}
     </div>
 
     {{-- pure --}}
@@ -191,10 +208,10 @@
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('back-button').href = "{{ route('food-type-for-production.calculation') }}?q=" + localStorage.getItem('selectedMaterialType');
+    const storageItem = localStorage.getItem('selectedPackageMaterial');
 
     if (JSON.parse(localStorage.getItem('selectedPackageMaterial')).length) {
         const tables = document.querySelectorAll('.table-result')
-        const storageItem = localStorage.getItem('selectedPackageMaterial');
 
         Array.from(tables, (element, index) => {
             let trCollection = element.querySelector('tbody').children
@@ -205,6 +222,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
         })
+    }
+
+    let messages = document.getElementById('messages').children
+
+    if (messages) {
+        for (div of messages) {
+            if (! storageItem.includes(div.dataset.id)) {
+                div.classList.add('hidden')
+            }
+        }
     }
 });
 </script>

@@ -62,7 +62,7 @@
                                     Home
                                 </x-index.navigation-link>
                             </li>
-                            <li>
+                            <li class="hidden">
                                 <x-index.navigation-link :link="route('food-packaging-material.index')">
                                     Food Packaging Material
                                 </x-index.navigation-link>
@@ -72,7 +72,7 @@
                                     Food Type for Production
                                 </x-index.navigation-link>
                             </li>
-                            <li>
+                            <li class="hidden">
                                 <x-index.navigation-link :link="route('suggestion')">
                                     Suggestion
                                 </x-index.navigation-link>

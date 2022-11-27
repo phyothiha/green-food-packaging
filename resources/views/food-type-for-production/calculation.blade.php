@@ -67,6 +67,19 @@
         @csrf
         @method('POST')
 
+
+        {{-- ftopsis --}}
+        <div>
+            <h3 class="mb-4 text-xl">
+                Table for "{{ request()->q }}" Food Type
+            </h3>
+
+            <div class="" id="ftopsis-form">
+                <input type="hidden" name="material" value="{{ request()->q }}">
+                <x-ftopsis.calculation-table :collection="$ftopsis_data"></x-ftopsis.calculation-table>
+            </div>
+        </div>
+
         {{-- fahp --}}
         <div>
             <h3 class="mb-4 text-xl">
@@ -181,18 +194,6 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
-
-        {{-- ftopsis --}}
-        <div>
-            <h3 class="mb-4 text-xl">
-                FTOPSIS Selection Table for "{{ request()->q }}"
-            </h3>
-
-            <div class="" id="ftopsis-form">
-                <input type="hidden" name="material" value="{{ request()->q }}">
-                <x-ftopsis.calculation-table :collection="$ftopsis_data"></x-ftopsis.calculation-table>
-            </div>
         </div>
 
         <x-theme.button-submit class="p-4 text-white bg-green-700 hover:bg-green-800 disabled:bg-gray-300 disabled:cursor-not-allowed" x-bind:disabled="!checkAllSelected">

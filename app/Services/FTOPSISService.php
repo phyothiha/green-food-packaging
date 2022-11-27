@@ -483,46 +483,36 @@ class FTOPSISService
             foreach ($fl_collection as $key => $attr) {
                 switch ($key) {
                     case 0:
-                        $result[$pkg][] = MaterialTypeLScale::where([ ['type', $material], ['package_material', $pkg], ])->first()?->package_material;
-                        // $result[$pkg][] = MaterialCostLScale::where([ ['cost', $attr], ['package_material', $pkg], ])->first()?->cost;
+                        $result['res'][$pkg][] = MaterialTypeLScale::where([ ['type', $material], ['package_material', $pkg], ])->first()?->package_material;
                         break;
-                    // case 1:
-                    //     $result[$pkg][] = MaterialEnvironmentalImpactLScale::where([ ['impact', $attr], ['package_material', $pkg], ])->first()?->impact;
-                    //     break;
-                    // case 2:
-                    //     $result[$pkg][] = MaterialConsumerMarketingIssueLScale::where([ ['issue', $attr], ['package_material', $pkg], ])->first()?->issue;
-                    //     break;
-                    // case 3:
-                    //     $result[$pkg][] = MaterialPropertiesLScale::where([ ['property', $attr], ['package_material', $pkg], ])->first()?->property;
-                    //     break;
                 }
             }
         }
 
         foreach ($keys as $key => $value) {
-            $result[$value][] = $this->ranking[$key];
+            $result['res'][$value][] = $this->ranking[$key];
 
             switch ($this->ranking[$key]) {
                 case 1:
-                    $result[$value][] = 'a';
+                    $result['ranking'][$value] = 1;
                     break;
                 case 2:
-                    $result[$value][] = 'b';
+                   $result['ranking'][$value] = 2;
                     break;
                 case 3:
-                    $result[$value][] = 'c';
+                   $result['ranking'][$value] = 3;
                     break;
                 case 4:
-                    $result[$value][] = 'd';
+                   $result['ranking'][$value] = 4;
                     break;
                 case 5:
-                    $result[$value][] = 'e';
+                   $result['ranking'][$value] = 5;
                     break;
                 case 6:
-                    $result[$value][] = 'f';
+                   $result['ranking'][$value] = 6;
                     break;
                 case 7:
-                    $result[$value][] = 'g';
+                   $result['ranking'][$value] = 7;
                     break;
             }
         }

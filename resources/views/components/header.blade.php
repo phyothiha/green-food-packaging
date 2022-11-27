@@ -1,6 +1,6 @@
-<header class="px-4 bg-green-800 h-16 shadow-lg">
+<header class="h-16 px-4 bg-green-800 shadow-lg">
     <div class="flex items-center h-full ">
-        <div class="text-white mr-10 lg:text-xl font-semibold lg:mr-20">
+        <div class="mr-10 font-semibold text-white lg:text-xl lg:mr-20">
             Green Food Packaging
         </div>
         <ul class="flex items-center justify-center h-full">
@@ -21,7 +21,7 @@
                     Home
                 </a>
             </li>
-            <li class="h-full">
+            <li class="hidden h-full">
                 {{-- <x-header-link route-name="food-packaging-material.index">
                     Food Packaging Material
                 </x-header-link> --}}
@@ -55,7 +55,7 @@
                     Food Type for Production
                 </a>
             </li>
-            <li class="h-full">
+            <li class="hidden h-full">
                 <x-header-link route-name="suggestion">
                     Suggestion
                 </x-header-link>

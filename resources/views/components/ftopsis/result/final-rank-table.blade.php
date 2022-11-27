@@ -7,7 +7,6 @@
         <tr>
             <th class="p-4">Type of Materials</th>
             <th class="p-4">Rank</th>
-            <th class="p-4">Suggestion</th>
         </tr>
     </thead>
     <tbody>
