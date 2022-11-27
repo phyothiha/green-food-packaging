@@ -197,7 +197,7 @@
         </div>
 
         <x-theme.button-submit class="p-4 text-white bg-green-700 hover:bg-green-800 disabled:bg-gray-300 disabled:cursor-not-allowed" x-bind:disabled="!checkAllSelected">
-            <span class="text-sm">Calculate</span>
+            <span class="text-sm">Result</span>
 
             <x-slot name="slot_after_text">
                 <x-icons.hi-calculator class="w-5 h-5" />

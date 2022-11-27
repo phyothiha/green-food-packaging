@@ -92,7 +92,7 @@
         isShow: false
     }">
         <div class="">
-            <h3 class="mb-4 text-xl">Material "{{ $material }}" Ranking</h3>
+            <h3 class="mb-4 text-xl">Material Ranking for "{{ $material }}"</h3>
 
             <div class="overflow-x-scroll lg:overflow-auto">
                 <x-ftopsis.result.final-rank-table :collection="$tbl['res']" />
