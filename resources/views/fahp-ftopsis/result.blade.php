@@ -210,19 +210,19 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('back-button').href = "{{ route('food-type-for-production.calculation') }}?q=" + localStorage.getItem('selectedMaterialType');
     const storageItem = localStorage.getItem('selectedPackageMaterial');
 
-    if (JSON.parse(localStorage.getItem('selectedPackageMaterial')).length) {
-        const tables = document.querySelectorAll('.table-result')
+    // if (JSON.parse(localStorage.getItem('selectedPackageMaterial')).length) {
+    //     const tables = document.querySelectorAll('.table-result')
 
-        Array.from(tables, (element, index) => {
-            let trCollection = element.querySelector('tbody').children
+    //     Array.from(tables, (element, index) => {
+    //         let trCollection = element.querySelector('tbody').children
 
-            for (tr of trCollection) {
-                if (! storageItem.includes(tr.dataset.id)) {
-                    tr.classList.add('hidden')
-                }
-            }
-        })
-    }
+    //         for (tr of trCollection) {
+    //             if (! storageItem.includes(tr.dataset.id)) {
+    //                 tr.classList.add('hidden')
+    //             }
+    //         }
+    //     })
+    // }
 
     let messages = document.getElementById('messages').children
 
