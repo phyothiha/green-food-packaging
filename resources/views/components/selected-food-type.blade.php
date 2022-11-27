@@ -16,13 +16,13 @@
                 {{ request()->q }}
             </td>
         </tr>
-        @foreach ($materials as $material)
+        @foreach ($materials as $key => $material)
             <tr class="odd:bg-white even:bg-gray-50" data-id="{{ $material }}">
                 <td class="p-4 text-center">
                     {{ $material }}
                 </td>
                 <td>
-                    <input type="checkbox" class="appearance-none checked:bg-indigo-500" name="selectedFoodType" data-material-type="{{ $material }}" />
+                    <input type="checkbox" class="appearance-none checked:bg-indigo-500" name="selectedFoodType" data-material-type="{{ $material }}" data-material-type-index="{{ $key }}" />
                 </td>
             </tr>
         @endforeach
@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (target.tagName != 'INPUT') return
 
         let targetValue = target.dataset.materialType
+        let targetValueIndex = target.dataset.materialTypeIndex
 
         if (localStorage.getItem('selectedPackageMaterial')) {
             let elements = JSON.parse(localStorage.getItem('selectedPackageMaterial'))
@@ -81,6 +82,24 @@ document.addEventListener('DOMContentLoaded', function () {
             elements.push(targetValue);
             localStorage.setItem('selectedPackageMaterial', JSON.stringify(elements))
         }
+
+        //
+        if (localStorage.getItem('selectedPackageMaterialIndex')) {
+            let elements = JSON.parse(localStorage.getItem('selectedPackageMaterialIndex'))
+            let result = [];
+            if (elements.includes(targetValueIndex)) {
+                result = elements.filter(element => element != targetValueIndex)
+                localStorage.setItem('selectedPackageMaterialIndex', JSON.stringify(result))
+            } else {
+                elements.push(targetValueIndex);
+                localStorage.setItem('selectedPackageMaterialIndex', JSON.stringify(elements))
+            }
+        } else {
+            let elements = [];
+            elements.push(targetValueIndex);
+            localStorage.setItem('selectedPackageMaterialIndex', JSON.stringify(elements))
+        }
+        //
 
         let elements = JSON.parse(localStorage.getItem('selectedPackageMaterial'))
 

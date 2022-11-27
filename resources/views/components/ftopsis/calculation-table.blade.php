@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (localStorage.getItem('selectedPackageMaterial')) {
             const spm = JSON.parse(localStorage.getItem('selectedPackageMaterial'));
+            const spmi = JSON.parse(localStorage.getItem('selectedPackageMaterialIndex'));
             const defaultSelected = JSON.parse(localStorage.getItem('defaultSelectedPackageMaterial'))
             if (spm.length) {
                 const max_filter = defaultSelected.filter(x => !spm.includes(x))
@@ -78,6 +79,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     const newHiddenInput = document.createElement('input')
                     newHiddenInput.type = 'hidden'
                     newHiddenInput.name = 'unselectedPackageMaterial[]'
+                    newHiddenInput.value = el
+                    inputsNode.appendChild(newHiddenInput);
+                })
+
+                spmi.forEach(el => {
+                    const newHiddenInput = document.createElement('input')
+                    newHiddenInput.type = 'hidden'
+                    newHiddenInput.name = 'selectedPackageMaterialIndex[]'
                     newHiddenInput.value = el
                     inputsNode.appendChild(newHiddenInput);
                 })

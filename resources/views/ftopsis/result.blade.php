@@ -98,9 +98,51 @@
         <h3 class="mb-4 text-xl">Material "{{ $material }}" Ranking</h3>
 
         <div class="overflow-x-scroll lg:overflow-auto">
-            <x-ftopsis.result.final-rank-table :collection="$tbl" />
+            <x-ftopsis.result.final-rank-table :collection="$tbl['res']" />
+
+            <div class="p-3 mt-3 text-sm text-center bg-yellow-300 rounded-lg">
+                {{ $tbl['first'] }} is suitable for reducing the envirnomental impact
+            </div>
         </div>
     </div>
+
+    <div x-data="{ open: false }">
+        <button x-on:click="open = !open" class="p-3 text-xs text-gray-500 transition duration-300 ease-in-out bg-blue-200 rounded-lg hover:bg-blue-500 hover:text-gray-50">Show Performance Evaluation</button>
+
+        <div x-show="open" class="mt-8">
+            {{-- sample design --}}
+            {{-- <div class="mb-12">
+                <h3 class="mb-4 text-xl">X Bar</h3>
+
+                {{ $x_bar['values_string'] . ' / ' . $x_bar['values_count'] }} = {{ $x_bar['value']}}
+            </div> --}}
+
+            <div class="mb-8">
+                <h3 class="mb-4 text-xl">X Bar</h3>
+
+                <x-ftopsis.result.pe class="mt-5" :result="$x_bar" title="x_bar" />
+            </div>
+
+            <div class="mb-8">
+                <h3 class="mb-4 text-xl">Mean Squared Error (MSE)</h3>
+
+                <x-ftopsis.result.pe class="mt-5" :result="$mse" title="MSE" />
+            </div>
+
+            <div class="mb-8">
+                <h3 class="mb-4 text-xl">Root-Mean-Square Error (RMSE)</h3>
+
+                <x-ftopsis.result.pe class="mt-5" :result="$rmse" title="RMSE" />
+            </div>
+
+            <div class="mb-8">
+                <h3 class="mb-4 text-xl">Mean Absolute Error (MAE)</h3>
+
+                <x-ftopsis.result.pe class="mt-5" :result="$mae" title="MAE" />
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @push('scripts')

@@ -34,6 +34,9 @@ class FTOPSISService
     public $gl_step8_d_star_result = [];
     public $gl_step8_d_minus_result = [];
     public $ranking = [];
+    public $gl_cgi = [];
+    public $gl_cgi_total = 0;
+    public $gl_mse = [];
 
     public function step_2($material, $collection, $unselectedPackageMaterial)
     {
@@ -302,7 +305,7 @@ class FTOPSISService
         foreach ($result as $name_key => $collection) {
             foreach ($collection as $collection_key => $item) {
                 foreach ($item as $key => $value) {
-                    // var_dump($key);
+
                     switch ($key) {
                         case 0:
                             $result_temp[$name_key]['l'][] = $result[$name_key][$collection_key][$key];
@@ -432,11 +435,12 @@ class FTOPSISService
         return $result;
     }
 
-    public function step_8()
+    public function step_8($selected_package_material_index)
     {
         $result = [];
         $to_rank = [];
         $cp_to_rank = [];
+        $tmp_cgi = [];
 
         foreach ($this->gl_step8_d_star_result as $key => $value) {
             $result[$key][] = $this->gl_step8_d_star_result[$key];
@@ -448,10 +452,29 @@ class FTOPSISService
                 $this->gl_step8_d_minus_result[$key] / ($this->gl_step8_d_minus_result[$key] + $value),
                 6
             );
+
+            // this is the key point
+            $tmp_cgi[] = $r;
+
+            // if ($selected_package_material_index && in_array($key, $selected_package_material_index)) {
+            //     $this->gl_cgi[] = $r;
+            // } else {
+            //     $this->gl_cgi[] = $r;
+            // }
+
             $result[$key][] = $r;
             $to_rank[] = $r;
             $cp_to_rank[] = $r;
         }
+
+        if ($selected_package_material_index) {
+            foreach ($selected_package_material_index as $value) {
+                $this->gl_cgi[] = $tmp_cgi[$value];
+            }
+        } else {
+            $this->gl_cgi = $tmp_cgi;
+        }
+
 
         foreach ($to_rank as $key => $value) {
             $max = max($cp_to_rank);
@@ -480,56 +503,131 @@ class FTOPSISService
             foreach ($fl_collection as $key => $attr) {
                 switch ($key) {
                     case 0:
-                        $result[$pkg][] = MaterialTypeLScale::where([ ['type', $material], ['package_material', $pkg], ])->first()?->package_material;
-                        // $result[$pkg][] = MaterialCostLScale::where([ ['cost', $attr], ['package_material', $pkg], ])->first()?->cost;
+                        $result['res'][$pkg][] = MaterialTypeLScale::where([ ['type', $material], ['package_material', $pkg], ])->first()?->package_material;
                         break;
-                    // case 1:
-                    //     $result[$pkg][] = MaterialEnvironmentalImpactLScale::where([ ['impact', $attr], ['package_material', $pkg], ])->first()?->impact;
-                    //     break;
-                    // case 2:
-                    //     $result[$pkg][] = MaterialConsumerMarketingIssueLScale::where([ ['issue', $attr], ['package_material', $pkg], ])->first()?->issue;
-                    //     break;
-                    // case 3:
-                    //     $result[$pkg][] = MaterialPropertiesLScale::where([ ['property', $attr], ['package_material', $pkg], ])->first()?->property;
-                    //     break;
                 }
             }
         }
 
         foreach ($keys as $key => $value) {
-            $result[$value][] = $this->ranking[$key];
+            $result['res'][$value][] = $this->ranking[$key];
 
             switch ($this->ranking[$key]) {
                 case 1:
-                    $result[$value][] = 'Extremely  more important to become Green Environment';
-                    break;
-                case 2:
-                    $result[$value][] = 'Very Strongly to extremely more important to become Green Environment';
-                    break;
-                case 3:
-                    $result[$value][] = 'Very Strongly more important to become Green Environment';
-                    break;
-                case 4:
-                    $result[$value][] = 'Very Strongly important to become Green Environment';
-                    break;
-                case 5:
-                    $result[$value][] = 'Stronly more important to become Green Environment';
-                    break;
-                case 6:
-                    $result[$value][] = 'Moderately to more strongly to become Green Environment';
-                    break;
-                case 7:
-                    $result[$value][] = 'Moderately more important to become Green Environment';
-                    break;
-                case 8:
-                    $result[$value][] = 'More than equally to become Green Environment';
-                    break;
-                case 9:
-                    $result[$value][] = 'Equally Important to become Green Environment';
+                    $result['first'] = $value;
                     break;
             }
         }
 
+        // dd($result);
+
         return $result;
     }
+
+    public function x_bar()
+    {
+        // ksort($this->gl_cgi);
+
+        $count = count($this->gl_cgi);
+
+        $value = round(
+            array_sum($this->gl_cgi) / $count,
+            6
+        );
+
+        $this->gl_cgi_total = $value;
+
+        return $value;
+
+        return [
+            'value' => $value,
+            'values_string' => implode(' + ', $this->gl_cgi),
+            'values_count' => $count,
+        ];
+    }
+
+    public function mse()
+    {
+        // ksort($this->gl_cgi);
+
+        $count = count($this->gl_cgi);
+        $values = [];
+
+        foreach ($this->gl_cgi as $value) {
+            $values[] = round(
+                pow(($value - $this->gl_cgi_total), 2),
+                6
+            );
+        }
+
+        $this->gl_mse = $values;
+
+        $value = round(array_sum($values) / $count, 6);
+
+        return $value;
+
+        return [
+            'value' => $value,
+            'values_string' => implode(' + ', $values),
+            'values_count' => $count,
+        ];
+    }
+
+    public function rmse()
+    {
+        // ksort($this->gl_cgi);
+
+        $count = count($this->gl_cgi);
+        $values = [];
+
+        foreach ($this->gl_cgi as $value) {
+            $values[] = round(
+                pow(($value - $this->gl_cgi_total), 2),
+                6
+            );
+        }
+
+        $this->gl_mse = $values;
+
+        $value = round(
+            sqrt(array_sum($values) / $count),
+            6
+        );
+
+        return $value;
+
+        return [
+            'value' => $value,
+            'values_string' => implode(' + ', $values),
+            'values_count' => $count,
+        ];
+    }
+
+    public function mae()
+    {
+        $count = count($this->gl_cgi);
+        $values = [];
+
+        foreach ($this->gl_cgi as $value) {
+            $values[] = round(
+                abs( pow(($value - $this->gl_cgi_total), 2) ),
+                6
+            );
+        }
+
+        $value = round(
+            sqrt(array_sum($values) / $count),
+            6
+        );
+
+        return $value;
+
+        return [
+            'value' => $value,
+            'values_string' => implode(' + ', $values),
+            'values_count' => $count,
+        ];
+    }
 }
+
+// abs( pow((1.107 - 1.752933) , 2) )

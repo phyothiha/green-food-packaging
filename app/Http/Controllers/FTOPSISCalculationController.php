@@ -29,6 +29,8 @@ class FTOPSISCalculationController extends Controller
         // dd($material, $input, $unselectedPackageMaterial, $material_type_package_material);
         // dd($unselectedPackageMaterial);
 
+        $selected_package_material_index = $request->input(['selectedPackageMaterialIndex']);
+
         return view('ftopsis.result', [
             'tbl_key' => $material_type_package_material,
             'material' => $material,
@@ -43,8 +45,12 @@ class FTOPSISCalculationController extends Controller
             'step_7_a_minus_result' => $this->ftopsis_service->step_7_a_minus_result(),
             'step_7_d_star_result' => $this->ftopsis_service->step_7_d_star_result(),
             'step_7_d_minus_result' => $this->ftopsis_service->step_7_d_minus_result(),
-            'step_8' => $this->ftopsis_service->step_8(),
+            'step_8' => $this->ftopsis_service->step_8($selected_package_material_index),
             'tbl' =>  $this->ftopsis_service->ranking($material, $input),
+            'x_bar' => $this->ftopsis_service->x_bar(),
+            'mse' => $this->ftopsis_service->mse(),
+            'rmse' => $this->ftopsis_service->rmse(),
+            'mae' => $this->ftopsis_service->mae(),
         ]);
     }
 }
