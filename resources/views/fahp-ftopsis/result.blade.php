@@ -4,7 +4,7 @@
 <div class="mb-14">
     <a
         href="{{ route('food-type-for-production.calculation') }}"
-        class="inline-flex items-center gap-2 p-3 text-xs text-gray-500 transition duration-300 ease-in-out bg-indigo-200 rounded-lg hover:bg-indigo-500 hover:text-gray-50"
+        class="inline-flex items-center gap-2 p-3 text-gray-500 transition duration-300 ease-in-out bg-indigo-200 rounded-lg hover:bg-indigo-500 hover:text-gray-50"
         id="back-button"
     >
         <x-icons.hi-arrow-left-circle class="w-4 h-4" />
@@ -100,7 +100,7 @@
                 <div id="messages">
                     @foreach ($tbl['ranking'] as $key => $rank)
                         @if ($rank !== 1)
-                            <div class="p-3 mt-3 text-sm text-center rounded-lg bg-slate-300" data-id="{{ $key }}">
+                            <div class="p-3 mt-3 text-center rounded-lg bg-slate-300" data-id="{{ $key }}">
                                 {{ $key }} is rank {{ $rank }}
                             </div>
                         @endif
@@ -108,7 +108,7 @@
                 </div>
                 @foreach ($tbl['ranking'] as $key => $rank)
                     @if ($rank == 1)
-                        <div class="p-3 mt-3 text-sm text-center bg-yellow-300 rounded-lg">
+                        <div class="p-3 mt-3 text-center bg-yellow-300 rounded-lg">
                             {{ $key }} is more suitable for reducing environmental impact
                         </div>
                     @endif
