@@ -2,15 +2,15 @@
     'result'
 ])
 
-<table class="w-full rounded-lg shadow-lg text-sm overflow-hidden">
-    <thead class="bg-teal-600 text-white">
+<table class="w-full overflow-hidden rounded-lg shadow-lg">
+    <thead class="text-white bg-teal-600">
         <tr>
-            <th class="p-4"></th>
-            <th class="p-4">Type of Materials</th>
-            <th class="p-4">Type of Usage</th>
-            <th class="p-4">Environmental Profile</th>
-            <th class="p-4">Consumer/Marketing Issues</th>
-            <th class="p-4">Properties</th>
+            <th class="p-4 text-lg"></th>
+            <th class="p-4 text-lg">Type of Materials</th>
+            <th class="p-4 text-lg">Type of Usage</th>
+            <th class="p-4 text-lg">Environmental Profile</th>
+            <th class="p-4 text-lg">Consumer/Marketing Issues</th>
+            <th class="p-4 text-lg">Properties</th>
         </tr>
     </thead>
     <tbody>

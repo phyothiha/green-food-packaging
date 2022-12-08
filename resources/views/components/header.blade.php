@@ -1,6 +1,6 @@
-<header class="px-4 bg-green-800 h-16 shadow-lg">
+<header class="h-16 px-4 bg-green-800 shadow-lg">
     <div class="flex items-center h-full ">
-        <div class="text-white mr-10 lg:text-xl font-semibold lg:mr-20">
+        <div class="mr-10 font-semibold text-white lg:text-xl lg:mr-20">
             Green Food Packaging
         </div>
         <ul class="flex items-center justify-center h-full">
@@ -12,7 +12,7 @@
                 <a
                     href="{{ route('index') }}"
                     class="
-                        font-medium block h-full flex items-center p-1.5 md:p-3 text-white text-sm transition duration-300 ease-in-out border-l-4 border-l-transparent
+                        font-medium block h-full flex items-center p-1.5 md:p-3 text-white transition duration-300 ease-in-out border-l-4 border-l-transparent
                         hover:bg-white hover:text-green-800 hover:border-l-gray-500
 
                         {{ (request()->is('/')) ? 'bg-white text-green-800' : '' }}
@@ -29,7 +29,7 @@
                 <a
                     href="{{ route('food-packaging-material.index') }}"
                     class="
-                        font-medium block h-full flex items-center p-1.5 md:p-3 text-white text-sm transition duration-300 ease-in-out border-l-4 border-l-transparent
+                        font-medium block h-full flex items-center p-1.5 md:p-3 text-white transition duration-300 ease-in-out border-l-4 border-l-transparent
                         hover:bg-white hover:text-green-800 hover:border-l-gray-500
 
                         {{ (request()->is('food-packaging-material')) ? 'bg-white text-green-800' : '' }}
@@ -46,7 +46,7 @@
                 <a
                     href="{{ route('food-type-for-production.index') }}"
                     class="
-                        font-medium block h-full flex items-center p-1.5 md:p-3 text-white text-sm transition duration-300 ease-in-out border-l-4 border-l-transparent
+                        font-medium block h-full flex items-center p-1.5 md:p-3 text-white transition duration-300 ease-in-out border-l-4 border-l-transparent
                         hover:bg-white hover:text-green-800 hover:border-l-gray-500
 
                         {{ (request()->is('food-type-for-production')) || (request()->is('food-type-for-production/*')) ? 'bg-white text-green-800' : '' }}

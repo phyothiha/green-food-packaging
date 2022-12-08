@@ -2,12 +2,12 @@
     'materials'
 ])
 
-<table class="w-full mb-10 overflow-hidden text-sm rounded-lg shadow-lg" id="package-material">
+<table class="w-full mb-10 overflow-hidden rounded-lg shadow-lg" id="package-material">
     <thead class="text-white bg-teal-600">
         <tr>
-            <th class="p-4">Food Type</th>
-            <th class="p-4">Package Material</th>
-            <th class="p-4"></th>
+            <th class="p-4 text-lg">Food Type</th>
+            <th class="p-4 text-lg">Package Material</th>
+            <th class="p-4 text-lg"></th>
         </tr>
     </thead>
     <tbody>

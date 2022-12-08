@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('main')
-    <table class="w-full overflow-hidden text-sm border border-collapse rounded-lg shadow-lg border-slate-500">
+    <table class="w-full overflow-hidden border border-collapse rounded-lg shadow-lg border-slate-500">
         <thead class="text-white bg-teal-600">
             <tr>
                 <th class="p-2.5">Type of Materials</th>

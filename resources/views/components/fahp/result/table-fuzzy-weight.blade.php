@@ -2,13 +2,13 @@
     'result'
 ])
 
-<table class="w-full rounded-lg shadow-lg text-sm overflow-hidden">
-    <thead class="bg-teal-600 text-white">
+<table class="w-full overflow-hidden rounded-lg shadow-lg">
+    <thead class="text-white bg-teal-600">
         <tr>
-            <th class="p-4"></th>
-            <th class="p-4">Fuzzy geometric mean value (r)</th>
-            <th class="p-4">Fuzzy Weight (w)</th>
-            <th class="p-4">(w)</th>
+            <th class="p-4 text-lg"></th>
+            <th class="p-4 text-lg">Fuzzy geometric mean value (r)</th>
+            <th class="p-4 text-lg">Fuzzy Weight (w)</th>
+            <th class="p-4 text-lg">(w)</th>
         </tr>
     </thead>
     <tbody>

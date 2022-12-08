@@ -4,7 +4,7 @@
     <div class="mb-14">
         <a
             href="{{ route('food-type-for-production.calculation') }}"
-            class="inline-flex items-center gap-2 p-3 text-xs text-gray-500 transition duration-300 ease-in-out bg-indigo-200 rounded-lg hover:bg-indigo-500 hover:text-gray-50"
+            class="inline-flex items-center gap-2 p-3 text-gray-500 transition duration-300 ease-in-out bg-indigo-200 rounded-lg hover:bg-indigo-500 hover:text-gray-50"
             id="back-button"
         >
             <x-icons.hi-arrow-left-circle class="w-4 h-4" />
@@ -100,14 +100,14 @@
         <div class="overflow-x-scroll lg:overflow-auto">
             <x-ftopsis.result.final-rank-table :collection="$tbl['res']" />
 
-            <div class="p-3 mt-3 text-sm text-center bg-yellow-300 rounded-lg">
-                {{ $tbl['first'] }} is suitable for reducing the envirnomental impact
+            <div class="p-3 mt-3 text-center bg-yellow-300 rounded-lg">
+                {{ $tbl['first'] }} is suitable for reducing the environmental impact
             </div>
         </div>
     </div>
 
     <div x-data="{ open: false }">
-        <button x-on:click="open = !open" class="p-3 text-xs text-gray-500 transition duration-300 ease-in-out bg-blue-200 rounded-lg hover:bg-blue-500 hover:text-gray-50">Show Performance Evaluation</button>
+        <button x-on:click="open = !open" class="p-3 text-gray-500 transition duration-300 ease-in-out bg-blue-200 rounded-lg hover:bg-blue-500 hover:text-gray-50">Show Performance Evaluation</button>
 
         <div x-show="open" class="mt-8">
             {{-- sample design --}}

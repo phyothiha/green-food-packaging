@@ -1,5 +1,5 @@
-<table class="w-full rounded-lg shadow-lg mb-10 text-sm lg:w-[800px] overflow-hidden">
-    <thead class="bg-teal-600 text-white">
+<table class="w-full rounded-lg shadow-lg mb-10 lg:w-[800px] overflow-hidden">
+    <thead class="text-white bg-teal-600">
         <tr>
             <th class="p-4">Linguistic</th>
             <th class="p-4">Linguistic</th>

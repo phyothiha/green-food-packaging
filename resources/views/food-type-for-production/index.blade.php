@@ -12,31 +12,31 @@
                     <span class="absolute inset-y-0 left-0 flex items-center pl-2">
                         <x-icons.hi-magnifying-glass class="w-4 h-4" />
                     </span>
-                    <input class="w-full py-3 pr-3 text-xs bg-white border-gray-200 rounded-lg shadow-sm placeholder:text-xs pl-9 focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 focus:ring-1" placeholder="Search Food..." type="text" value="{{ request()->q }}" name="q" />
+                    <input class="w-full py-3 pr-3 bg-white border-gray-200 rounded-lg shadow-sm pl-9 focus:outline-none focus:border-indigo-500 focus:ring-indigo-500 focus:ring-1" placeholder="Search Food..." type="text" value="{{ request()->q }}" name="q" />
                 </label>
             </div>
             <div class="flex gap-2">
-                <button type="submit" class="w-20 px-4 text-xs font-bold text-gray-100 transition duration-300 ease-in-out bg-blue-500 rounded-lg hover:bg-blue-700">
+                <button type="submit" class="px-4 text-gray-100 transition duration-300 ease-in-out bg-blue-500 rounded-lg hover:bg-blue-700">
                     Search
                 </button>
-                <a href="{{ route('food-type-for-production.index') }}#page-anchor" class="flex items-center justify-center w-20 px-4 text-xs font-bold text-gray-700 transition duration-300 ease-in-out rounded-lg outline outline-gray-500 hover:bg-gray-700 hover:text-gray-100">
+                <a href="{{ route('food-type-for-production.index') }}#page-anchor" class="flex items-center justify-center px-4 text-gray-700 transition duration-300 ease-in-out rounded-lg outline outline-gray-500 hover:bg-gray-700 hover:text-gray-100">
                     Clear
                 </a>
             </div>
         </form>
 
-        <div class="hidden p-3 mb-6 text-xs text-white bg-red-500 rounded-lg shadow" id="error-message">
+        <div class="hidden p-3 mb-6 text-white bg-red-500 rounded-lg shadow" id="error-message">
             Please select a type of Food.
         </div>
 
-        <div class="hidden p-3 mb-6 text-xs text-white rounded-lg shadow bg-slate-500" id="selected-material-type"></div>
+        <div class="hidden p-3 mb-6 text-white rounded-lg shadow bg-slate-500" id="selected-material-type"></div>
 
         <div class="mb-5 h-[450px] overflow-y-scroll shadow-lg rounded-lg bg-white">
-            <table class="w-full overflow-hidden text-sm table-fixed" id="table">
+            <table class="w-full overflow-hidden table-fixed" id="table">
                 <thead class="text-white bg-teal-600">
                     <tr>
                         <th class="px-5 py-3.5 w-28"></th>
-                        <th class="px-5 py-3.5">Type of Food</th>
+                        <th class="px-5 py-3.5 text-lg">Type of Food</th>
                     </tr>
                 </thead>
 
@@ -46,7 +46,7 @@
                             <td class="text-center">
                                 <input type="radio" class="appearance-none checked:bg-indigo-500" name="selectedFoodType" data-material-type="{{ $material->type }}" />
                             </td>
-                            <td class="px-5 py-3.5">
+                            <td class="px-5 py-3.5 text-lg">
                                 {{ $material->type }}
                             </td>
                         </tr>
@@ -70,8 +70,8 @@
     </div>
 
     <div class="text-right">
-        <x-theme.button-link :route="route('food-type-for-production.calculation')" class="p-4 text-gray-100 bg-indigo-500 hover:bg-indigo-700" id="calculation-btn">
-            <span class="text-sm">Go to calculation</span>
+        <x-theme.button-link :route="route('food-type-for-production.calculation')" class="px-6 py-3 text-gray-100 bg-indigo-500 hover:bg-indigo-700" id="calculation-btn">
+            <span class="">Next</span>
 
             <x-slot name="slot_after_text">
                 <x-icons.hi-calculator class="w-5 h-5" />

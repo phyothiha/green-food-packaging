@@ -7,7 +7,7 @@
     <div class="mb-14">
         <a
             href="{{ route('food-type-for-production.index') }}"
-            class="inline-flex items-center gap-2 p-3 text-xs text-gray-500 transition duration-300 ease-in-out bg-indigo-200 rounded-lg hover:bg-indigo-500 hover:text-gray-50"
+            class="inline-flex items-center gap-2 p-3 text-gray-500 transition duration-300 ease-in-out bg-indigo-200 rounded-lg hover:bg-indigo-500 hover:text-gray-50"
         >
             <x-icons.hi-arrow-left-circle class="w-4 h-4" />
 
@@ -29,10 +29,10 @@
 
         <ul class="flex items-center justify-center">
             <li class="pr-4">
-                <a href="#" @click.prevent="tab = 'fahp'" class="block w-[120px] text-center p-2.5 border-2 rounded-lg text-sm transition ease-in-out duration-300 hover:bg-green-800 hover:border-green-800 hover:text-white hover:shadow-lg" :class="tab === 'fahp' ? 'bg-green-800 border-green-800 text-white shadow-lg' : 'border-green-600 bg-white'">FAHP</a>
+                <a href="#" @click.prevent="tab = 'fahp'" class="block w-[120px] text-center p-2.5 border-2 rounded-lg transition ease-in-out duration-300 hover:bg-green-800 hover:border-green-800 hover:text-white hover:shadow-lg" :class="tab === 'fahp' ? 'bg-green-800 border-green-800 text-white shadow-lg' : 'border-green-600 bg-white'">FAHP</a>
             </li>
             <li>
-                <a href="#" @click.prevent="tab = 'ftopsis'" class="block w-[120px] text-center p-2.5 border-2 rounded-lg text-sm transition ease-in-out duration-300 hover:bg-green-800 hover:border-green-800 hover:text-white hover:shadow-lg" :class="tab === 'ftopsis' ? 'bg-green-800 border-green-800 text-white shadow-lg' : 'border-green-600 bg-white'">FTOPSIS</a>
+                <a href="#" @click.prevent="tab = 'ftopsis'" class="block w-[120px] text-center p-2.5 border-2 rounded-lg transition ease-in-out duration-300 hover:bg-green-800 hover:border-green-800 hover:text-white hover:shadow-lg" :class="tab === 'ftopsis' ? 'bg-green-800 border-green-800 text-white shadow-lg' : 'border-green-600 bg-white'">FTOPSIS</a>
             </li>
         </ul>
     </nav>
@@ -97,11 +97,11 @@
                 @method('POST')
                 @csrf
 
-                <table class="w-full rounded-lg shadow-lg mb-10 text-sm lg:w-[800px] overflow-hidden">
+                <table class="w-full rounded-lg shadow-lg mb-10 lg:w-[800px] overflow-hidden">
                     <thead class="text-white bg-teal-600">
                         <tr>
                             <th class="p-4"></th>
-                            <th class="p-4">Linguistic Scale</th>
+                            <th class="p-4 text-lg">Linguistic Scale</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -118,7 +118,7 @@
                             </td>
 
                             <td class="p-4">
-                                <select class="w-full text-sm border-gray-200 rounded-lg appearance-none" name="type[t1]" x-model="select.field_1"
+                                <select class="w-full border-gray-200 rounded-lg appearance-none" name="type[t1]" x-model="select.field_1"
                                     x-on:change="markedAsSelected()"
                                 >
                                     <template x-for="item in data">
@@ -136,7 +136,7 @@
                                 Type of Cost
                             </td>
                             <td class="p-4">
-                                <select class="w-full text-sm border-gray-200 rounded-lg appearance-none" name="type[t2]" x-model="select.field_2"
+                                <select class="w-full border-gray-200 rounded-lg appearance-none" name="type[t2]" x-model="select.field_2"
                                     x-on:change="markedAsSelected()"
                                 >
                                     <template x-for="item in data">
@@ -154,7 +154,7 @@
                                 Environmental Profile
                             </td>
                             <td class="p-4">
-                                <select class="w-full text-sm border-gray-200 rounded-lg appearance-none" name="type[t3]" x-model="select.field_3"
+                                <select class="w-full border-gray-200 rounded-lg appearance-none" name="type[t3]" x-model="select.field_3"
                                     x-on:change="markedAsSelected()"
                                 >
                                     <template x-for="item in data">
@@ -172,7 +172,7 @@
                                 Consumer/Marketing Issues
                             </td>
                             <td class="p-4">
-                                <select class="w-full text-sm border-gray-200 rounded-lg appearance-none" name="type[t4]" x-model="select.field_4"
+                                <select class="w-full border-gray-200 rounded-lg appearance-none" name="type[t4]" x-model="select.field_4"
                                     x-on:change="markedAsSelected()"
                                 >
                                     <template x-for="item in data">
@@ -190,7 +190,7 @@
                                 Properties
                             </td>
                             <td class="p-4">
-                                <select class="w-full text-sm border-gray-200 rounded-lg appearance-none" name="type[t5]" x-model="select.field_5"
+                                <select class="w-full border-gray-200 rounded-lg appearance-none" name="type[t5]" x-model="select.field_5"
                                     x-on:change="markedAsSelected()"
                                 >
                                     <template x-for="item in data">
@@ -213,9 +213,8 @@
                 >
                     Calculate
                 </button> --}}
-
                 <x-theme.button-submit class="p-4 text-white bg-green-700 hover:bg-green-800 disabled:bg-gray-300 disabled:cursor-not-allowed" x-bind:disabled="!checkAllSelected">
-                    <span class="text-sm">Calculate</span>
+                    <span class="">Result</span>
 
                     <x-slot name="slot_after_text">
                         <x-icons.hi-calculator class="w-5 h-5" />
@@ -236,12 +235,12 @@
             <x-ftopsis.calculation-table :collection="$ftopsis_data"></x-ftopsis.calculation-table>
 
             <x-theme.button-submit class="p-4 text-white bg-green-700 hover:bg-green-800 disabled:bg-gray-300 disabled:cursor-not-allowed">
-                <span class="text-sm">Calculate</span>
+                    <span class="">Result</span>
 
-                <x-slot name="slot_after_text">
-                    <x-icons.hi-calculator class="w-5 h-5" />
-                </x-slot>
-            </x-theme.button-submit>
+                    <x-slot name="slot_after_text">
+                        <x-icons.hi-calculator class="w-5 h-5" />
+                    </x-slot>
+                </x-theme.button-submit>
         </form>
     </div>
 </div>
