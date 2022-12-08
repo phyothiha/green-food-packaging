@@ -95,7 +95,7 @@
             <h3 class="mb-4 text-xl">Material Ranking for "{{ $material }}"</h3>
 
             <div class="overflow-x-scroll lg:overflow-auto">
-                <x-ftopsis.result.final-rank-table :collection="$tbl['res']" />
+                <x-ftopsis.result.final-rank-table :collection="$tbl['ranking']" />
 
                 <div id="messages">
                     @foreach ($tbl['ranking'] as $key => $rank)

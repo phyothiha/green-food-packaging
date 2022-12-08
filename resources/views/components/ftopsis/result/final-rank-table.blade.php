@@ -10,13 +10,14 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($collection as $fl_key => $fl_collection)
-            <tr class=" odd:bg-white even:bg-gray-50"  data-id="{{ $fl_key }}">
-                @foreach ($fl_collection as $item)
-                    <td class="p-4 text-center">
-                        {{ $item }}
-                    </td>
-                @endforeach
+        @foreach ($collection as $key => $value)
+            <tr class=" odd:bg-white even:bg-gray-50"  data-id="{{ $key }}">
+                <td class="p-4 text-center">
+                    {{ $key }}
+                </td>
+                <td class="p-4 text-center">
+                    {{ $value }}
+                </td>
             </tr>
         @endforeach
     </tbody>
