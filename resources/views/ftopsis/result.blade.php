@@ -95,19 +95,36 @@
     </div>
 
     <div class="mb-12">
-        <h3 class="mb-4 text-xl">Material "{{ $material }}" Ranking</h3>
+        <h3 class="mb-4 text-xl">Material Ranking for "{{ $material }}"</h3>
 
         <div class="overflow-x-scroll lg:overflow-auto">
-            <x-ftopsis.result.final-rank-table :collection="$tbl['res']" />
+            <x-ftopsis.result.final-rank-table :collection="$tbl['ranking']" />
 
-            <div class="p-3 mt-3 text-center bg-yellow-300 rounded-lg">
+            {{-- <div class="p-3 mt-3 text-center bg-yellow-300 rounded-lg">
                 {{ $tbl['first'] }} is suitable for reducing the environmental impact
+            </div> --}}
+
+            <div id="messages">
+                @foreach ($tbl['ranking'] as $key => $rank)
+                    @if ($rank !== 1)
+                        <div class="p-3 mt-3 text-center rounded-lg bg-slate-300" data-id="{{ $key }}">
+                            {{ $key }} is rank {{ $rank }}
+                        </div>
+                    @endif
+                @endforeach
             </div>
+            @foreach ($tbl['ranking'] as $key => $rank)
+                @if ($rank == 1)
+                    <div class="p-3 mt-3 text-center bg-yellow-300 rounded-lg">
+                        {{ $key }} is more suitable for reducing environmental impact
+                    </div>
+                @endif
+            @endforeach
         </div>
     </div>
 
     <div x-data="{ open: false }">
-        <button x-on:click="open = !open" class="p-3 text-gray-500 transition duration-300 ease-in-out bg-blue-200 rounded-lg hover:bg-blue-500 hover:text-gray-50">Show Performance Evaluation</button>
+        <button x-on:click="open = !open" class="p-3 text-gray-500 transition duration-300 ease-in-out bg-blue-200 rounded-lg hover:bg-blue-500 hover:text-gray-50">Show Performance Evaluation (FAHP & FTOPSIS)</button>
 
         <div x-show="open" class="mt-8">
             {{-- sample design --}}
@@ -117,13 +134,23 @@
                 {{ $x_bar['values_string'] . ' / ' . $x_bar['values_count'] }} = {{ $x_bar['value']}}
             </div> --}}
 
-            <div class="mb-8">
+            {{-- <div class="mb-8">
                 <h3 class="mb-4 text-xl">X Bar</h3>
 
                 <x-ftopsis.result.pe class="mt-5" :result="$x_bar" title="x_bar" />
-            </div>
+            </div> --}}
 
             <div class="mb-8">
+                <h3 class="mb-4 text-xl">FAHP & FTOPSIS</h3>
+
+                <x-ftopsis.result.pe class="mt-5" :result="[
+                    'Mean Squared Error (MSE)' => $mse,
+                    'Root-Mean-Square Error (RMSE)' => $rmse,
+                    'Mean Absolute Error (MAE)' => $mae
+                ]" />
+            </div>
+
+            {{-- <div class="mb-8">
                 <h3 class="mb-4 text-xl">Mean Squared Error (MSE)</h3>
 
                 <x-ftopsis.result.pe class="mt-5" :result="$mse" title="MSE" />
@@ -139,7 +166,7 @@
                 <h3 class="mb-4 text-xl">Mean Absolute Error (MAE)</h3>
 
                 <x-ftopsis.result.pe class="mt-5" :result="$mae" title="MAE" />
-            </div>
+            </div> --}}
         </div>
     </div>
 
@@ -149,20 +176,30 @@
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('back-button').href = "{{ route('food-type-for-production.calculation') }}?q=" + localStorage.getItem('selectedMaterialType');
+    const storageItem = localStorage.getItem('selectedPackageMaterial');
 
-    if (JSON.parse(localStorage.getItem('selectedPackageMaterial')).length) {
-        const tables = document.querySelectorAll('.table-result')
-        const storageItem = localStorage.getItem('selectedPackageMaterial');
+    // if (JSON.parse(localStorage.getItem('selectedPackageMaterial')).length) {
+    //     const tables = document.querySelectorAll('.table-result')
 
-        Array.from(tables, (element, index) => {
-            let trCollection = element.querySelector('tbody').children
+    //     Array.from(tables, (element, index) => {
+    //         let trCollection = element.querySelector('tbody').children
 
-            for (tr of trCollection) {
-                if (! storageItem.includes(tr.dataset.id)) {
-                    tr.classList.add('hidden')
-                }
+    //         for (tr of trCollection) {
+    //             if (! storageItem.includes(tr.dataset.id)) {
+    //                 tr.classList.add('hidden')
+    //             }
+    //         }
+    //     })
+    // }
+
+    let messages = document.getElementById('messages').children
+
+    if (messages) {
+        for (div of messages) {
+            if (! storageItem.includes(div.dataset.id)) {
+                div.classList.add('hidden')
             }
-        })
+        }
     }
 });
 </script>

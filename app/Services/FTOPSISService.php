@@ -84,8 +84,6 @@ class FTOPSISService
 
         $this->gl_result = $result;
 
-
-
         return $result;
     }
 
@@ -509,17 +507,43 @@ class FTOPSISService
             }
         }
 
+        // foreach ($keys as $key => $value) {
+        //     $result['res'][$value][] = $this->ranking[$key];
+
+        //     switch ($this->ranking[$key]) {
+        //         case 1:
+        //             $result['first'] = $value;
+        //             break;
+        //     }
+        // }
+
         foreach ($keys as $key => $value) {
             $result['res'][$value][] = $this->ranking[$key];
 
             switch ($this->ranking[$key]) {
                 case 1:
-                    $result['first'] = $value;
+                    $result['ranking'][$value] = 1;
+                    break;
+                case 2:
+                   $result['ranking'][$value] = 2;
+                    break;
+                case 3:
+                   $result['ranking'][$value] = 3;
+                    break;
+                case 4:
+                   $result['ranking'][$value] = 4;
+                    break;
+                case 5:
+                   $result['ranking'][$value] = 5;
+                    break;
+                case 6:
+                   $result['ranking'][$value] = 6;
+                    break;
+                case 7:
+                   $result['ranking'][$value] = 7;
                     break;
             }
         }
-
-        // dd($result);
 
         return $result;
     }
