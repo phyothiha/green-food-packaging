@@ -57,11 +57,11 @@
                         <hr class="lg:mt-2.5 lg:mb-8 w-3/12 bg-indigo-500 h-1 rounded-lg">
 
                         <ul class="space-y-4">
-                            <li>
+                            {{-- <li>
                                 <x-index.navigation-link :link="route('index')">
                                     Home
                                 </x-index.navigation-link>
-                            </li>
+                            </li> --}}
                             <li class="hidden">
                                 <x-index.navigation-link :link="route('food-packaging-material.index')">
                                     Food Packaging Material

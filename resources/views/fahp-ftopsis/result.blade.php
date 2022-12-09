@@ -92,24 +92,32 @@
         isShow: false
     }">
         <div class="">
-            <h3 class="mb-4 text-xl">Material Ranking for "{{ $material }}"</h3>
+            <h3 class="mb-4 text-xl font-bold text-teal-600">Material Ranking for "{{ $material }}"</h3>
 
             <div class="overflow-x-scroll lg:overflow-auto">
                 <x-ftopsis.result.final-rank-table :collection="$tbl['ranking']" />
 
                 <div id="messages">
-                    @foreach ($tbl['ranking'] as $key => $rank)
-                        @if ($rank !== 1)
-                            <div class="p-3 mt-3 text-center rounded-lg bg-slate-300" data-id="{{ $key }}">
-                                {{ $key }} is rank {{ $rank }}
-                            </div>
-                        @endif
-                    @endforeach
+                    <div class="mt-8">
+                        <h3 class="text-xl font-bold text-teal-600">Material Ranking for "{{ $material }}" (User selected)</h3>
+
+                        @foreach ($tbl['ranking'] as $key => $rank)
+                            @if ($rank !== 1)
+                                <div class="p-3 mt-3 rounded-lg bg-slate-300" data-id="{{ $key }}">
+                                    {{ $key }} is rank {{ $rank }}
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
                 </div>
                 @foreach ($tbl['ranking'] as $key => $rank)
                     @if ($rank == 1)
-                        <div class="p-3 mt-3 text-center bg-yellow-300 rounded-lg">
-                            {{ $key }} is more suitable for reducing environmental impact
+                        <div class="mt-8">
+                            <h3 class="text-xl font-bold text-teal-600">Recommended for "{{ $material }}"</h3>
+
+                            <div class="p-3 mt-3 bg-yellow-300 rounded-lg">
+                                {{ $key }} is more suitable for reducing environmental impact
+                            </div>
                         </div>
                     @endif
                 @endforeach
