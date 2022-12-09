@@ -97,10 +97,10 @@
             <div class="overflow-x-scroll lg:overflow-auto">
                 <x-ftopsis.result.final-rank-table :collection="$tbl['ranking']" />
 
-                <div id="messages">
-                    <div class="mt-8">
-                        <h3 class="text-xl font-bold text-teal-600">Material Ranking for "{{ $material }}" (User selected)</h3>
+                <h3 class="mt-6 text-xl font-bold text-teal-600">Material Ranking for "{{ $material }}" (User selected)</h3>
 
+                <div id="messages">
+                    {{-- <div class="mt-8"> --}}
                         @foreach ($tbl['ranking'] as $key => $rank)
                             @if ($rank !== 1)
                                 <div class="p-3 mt-3 rounded-lg bg-slate-300" data-id="{{ $key }}">
@@ -108,17 +108,17 @@
                                 </div>
                             @endif
                         @endforeach
-                    </div>
+                    {{-- </div> --}}
                 </div>
                 @foreach ($tbl['ranking'] as $key => $rank)
                     @if ($rank == 1)
-                        <div class="mt-8">
-                            <h3 class="text-xl font-bold text-teal-600">Recommended for "{{ $material }}"</h3>
+                        {{-- <div class="mt-8"> --}}
+                            <h3 class="mt-6 text-xl font-bold text-teal-600">Recommended for "{{ $material }}"</h3>
 
                             <div class="p-3 mt-3 bg-yellow-300 rounded-lg">
                                 {{ $key }} is more suitable for reducing environmental impact
                             </div>
-                        </div>
+                        {{-- </div> --}}
                     @endif
                 @endforeach
             </div>
@@ -216,7 +216,7 @@
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('back-button').href = "{{ route('food-type-for-production.calculation') }}?q=" + localStorage.getItem('selectedMaterialType');
-    const storageItem = localStorage.getItem('selectedPackageMaterial');
+    const storageItem = JSON.parse(localStorage.getItem('selectedPackageMaterial'));
 
     // if (JSON.parse(localStorage.getItem('selectedPackageMaterial')).length) {
     //     const tables = document.querySelectorAll('.table-result')
@@ -236,7 +236,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (messages) {
         for (div of messages) {
-            if (! storageItem.includes(div.dataset.id)) {
+            if (storageItem.length && !storageItem.includes(div.dataset.id)) {
                 div.classList.add('hidden')
             }
         }
