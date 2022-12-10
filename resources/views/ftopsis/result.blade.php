@@ -95,29 +95,33 @@
     </div>
 
     <div class="mb-12">
-        <h3 class="mb-4 text-xl">Material Ranking for "{{ $material }}"</h3>
+        <h3 class="mb-4 text-xl font-bold text-teal-600">Material Ranking for "{{ $material }}"</h3>
 
         <div class="overflow-x-scroll lg:overflow-auto">
             <x-ftopsis.result.final-rank-table :collection="$tbl['ranking']" />
 
-            {{-- <div class="p-3 mt-3 text-center bg-yellow-300 rounded-lg">
-                {{ $tbl['first'] }} is suitable for reducing the environmental impact
-            </div> --}}
+            <h3 class="mt-6 text-xl font-bold text-teal-600">Material Ranking for "{{ $material }}" (User selected)</h3>
 
             <div id="messages">
-                @foreach ($tbl['ranking'] as $key => $rank)
-                    @if ($rank !== 1)
-                        <div class="p-3 mt-3 text-center rounded-lg bg-slate-300" data-id="{{ $key }}">
-                            {{ $key }} is rank {{ $rank }}
-                        </div>
-                    @endif
-                @endforeach
+                {{-- <div class="mt-8"> --}}
+                    @foreach ($tbl['ranking'] as $key => $rank)
+                        @if ($rank !== 1)
+                            <div class="p-3 mt-3 rounded-lg bg-slate-300" data-id="{{ $key }}">
+                                {{ $key }} is rank {{ $rank }}
+                            </div>
+                        @endif
+                    @endforeach
+                {{-- </div> --}}
             </div>
             @foreach ($tbl['ranking'] as $key => $rank)
                 @if ($rank == 1)
-                    <div class="p-3 mt-3 text-center bg-yellow-300 rounded-lg">
-                        {{ $key }} is more suitable for reducing environmental impact
-                    </div>
+                    {{-- <div class="mt-8"> --}}
+                        <h3 class="mt-6 text-xl font-bold text-teal-600">Recommended for "{{ $material }}"</h3>
+
+                        <div class="p-3 mt-3 bg-yellow-300 rounded-lg">
+                            {{ $key }} is more suitable for reducing environmental impact
+                        </div>
+                    {{-- </div> --}}
                 @endif
             @endforeach
         </div>
@@ -127,19 +131,6 @@
         <button x-on:click="open = !open" class="p-3 text-gray-500 transition duration-300 ease-in-out bg-blue-200 rounded-lg hover:bg-blue-500 hover:text-gray-50">Show Performance Evaluation (FAHP & FTOPSIS)</button>
 
         <div x-show="open" class="mt-8">
-            {{-- sample design --}}
-            {{-- <div class="mb-12">
-                <h3 class="mb-4 text-xl">X Bar</h3>
-
-                {{ $x_bar['values_string'] . ' / ' . $x_bar['values_count'] }} = {{ $x_bar['value']}}
-            </div> --}}
-
-            {{-- <div class="mb-8">
-                <h3 class="mb-4 text-xl">X Bar</h3>
-
-                <x-ftopsis.result.pe class="mt-5" :result="$x_bar" title="x_bar" />
-            </div> --}}
-
             <div class="mb-8">
                 <h3 class="mb-4 text-xl">FAHP & FTOPSIS</h3>
 
@@ -149,54 +140,159 @@
                     'Mean Absolute Error (MAE)' => $mae
                 ]" />
             </div>
-
-            {{-- <div class="mb-8">
-                <h3 class="mb-4 text-xl">Mean Squared Error (MSE)</h3>
-
-                <x-ftopsis.result.pe class="mt-5" :result="$mse" title="MSE" />
-            </div>
-
-            <div class="mb-8">
-                <h3 class="mb-4 text-xl">Root-Mean-Square Error (RMSE)</h3>
-
-                <x-ftopsis.result.pe class="mt-5" :result="$rmse" title="RMSE" />
-            </div>
-
-            <div class="mb-8">
-                <h3 class="mb-4 text-xl">Mean Absolute Error (MAE)</h3>
-
-                <x-ftopsis.result.pe class="mt-5" :result="$mae" title="MAE" />
-            </div> --}}
         </div>
     </div>
 
+
+    {{-- pure ftopsis only --}}
+    <div x-data="{ show: false }">
+        <button x-on:click="show = !show" class="p-3 my-5 text-gray-500 transition duration-300 ease-in-out bg-blue-200 rounded-lg hover:bg-blue-500 hover:text-gray-50">Compare with FTOPSIS weight</button>
+
+        <div x-show="show" class="mt-8">
+            <div class="mb-12">
+                <h3 class="mb-4 text-xl">Step 2: </h3>
+
+                <div class="overflow-x-scroll lg:overflow-auto">
+                    <x-ftopsis.result.table :collection="$pure_step_2" />
+                </div>
+            </div>
+
+            <div class="mb-12">
+              <h3 class="mb-4 text-xl">Step 3: </h3>
+
+              <div class="overflow-x-scroll lg:overflow-auto">
+                  <x-ftopsis.result.table :collection="$pure_step_3" />
+              </div>
+            </div>
+
+            <div class="mb-12">
+              <h3 class="mb-4 text-xl">Step 4: </h3>
+
+              <div class="overflow-x-scroll lg:overflow-auto">
+                  <x-ftopsis.result.table :collection="$pure_step_4" />
+                  <x-ftopsis.result.table class="mt-5" :collection="$pure_step_4_cal" />
+              </div>
+            </div>
+
+            <div class="mb-12">
+              <h3 class="mb-4 text-xl">Step 5: </h3>
+
+              <div class="overflow-x-scroll lg:overflow-auto">
+                  <x-ftopsis.result.table :collection="$pure_step_5" />
+                  <x-ftopsis.result.table class="mt-5" :collection="$pure_step_5_cal" />
+              </div>
+            </div>
+
+            <div class="mb-12">
+              <h3 class="mb-4 text-xl">Step 6: Calculate the fuzzy Positive Ideal Solution(FPIS) and Fuzzy Negative Ideal Solution(FNIS)</h3>
+
+              <div class="overflow-x-scroll lg:overflow-auto">
+                  <x-ftopsis.result.step6 :collection="$pure_step_6" />
+              </div>
+            </div>
+
+            <div class="mb-12">
+              <h3 class="mb-4 text-xl">Step 7: Calculate the distance value from each alternative to the FPIS and to the FNIS</h3>
+
+              <div class="space-y-5 overflow-x-scroll lg:overflow-auto">
+                  <div>
+                      <h3 class="mb-3 text-lg">A <sup>*</sup> result</h3>
+                      <x-ftopsis.result.table :collection="$pure_step_7_a_star_result" />
+                  </div>
+                  <div>
+                      <h3 class="mb-3 text-lg">A <sup>-</sup> result</h3>
+                      <x-ftopsis.result.table class="mt-5" :collection="$pure_step_7_a_minus_result" />
+                  </div>
+                  <div>
+                      <h3 class="mb-3 text-lg">d <sup>*</sup> result</h3>
+                      <x-ftopsis.result.d :collection="$pure_step_7_d_star_result" name="d" sign="*" />
+                  </div>
+                  <div>
+                      <h3 class="mb-3 text-lg">d <sup>-</sup> result</h3>
+                      <x-ftopsis.result.d class="mt-5" :collection="$pure_step_7_d_minus_result" name="d" sign="-" />
+                  </div>
+              </div>
+            </div>
+
+            <div class="mb-12">
+              <h3 class="mb-4 text-xl">Step 8: Calculate the closeness coefficient for each alternative above the equation</h3>
+
+              <div class="overflow-x-scroll lg:overflow-auto">
+                  <x-ftopsis.result.step8 :collection="$pure_step_8" :tbl_key="$tbl_key" />
+              </div>
+            </div>
+
+            <div class="mb-12">
+              <h3 class="mb-4 text-xl font-bold text-teal-600">Material Ranking for "{{ $material }}"</h3>
+
+              <div class="overflow-x-scroll lg:overflow-auto">
+                  <x-ftopsis.result.final-rank-table :collection="$pure_ftopsis_tbl_ranking['ranking']" />
+
+                  <h3 class="mt-6 text-xl font-bold text-teal-600">Material Ranking for "{{ $material }}" (User selected)</h3>
+
+                  <div id="messagespure">
+                      @foreach ($tbl['ranking'] as $key => $rank)
+                          @if ($rank !== 1)
+                              <div class="p-3 mt-3 rounded-lg bg-slate-300" data-id="{{ $key }}">
+                                  {{ $key }} is rank {{ $rank }}
+                              </div>
+                          @endif
+                      @endforeach
+                  </div>
+                  @foreach ($tbl['ranking'] as $key => $rank)
+                      @if ($rank == 1)
+                          <h3 class="mt-6 text-xl font-bold text-teal-600">Recommended for "{{ $material }}"</h3>
+
+                          <div class="p-3 mt-3 bg-yellow-300 rounded-lg">
+                              {{ $key }} is more suitable for reducing environmental impact
+                          </div>
+                      @endif
+                  @endforeach
+              </div>
+            </div>
+
+            <div x-data="{ open: false }">
+              <button x-on:click="open = !open" class="p-3 text-gray-500 transition duration-300 ease-in-out bg-blue-200 rounded-lg hover:bg-blue-500 hover:text-gray-50">Show Performance Evaluation (FTOPSIS)</button>
+
+              <div x-show="open" class="mt-8">
+                  <div class="mb-8">
+                      <h3 class="mb-4 text-xl">FTOPSIS</h3>
+
+                      <x-ftopsis.result.pe class="mt-5" :result="[
+                          'Mean Squared Error (MSE)' => $pure_mse,
+                          'Root-Mean-Square Error (RMSE)' => $pure_rmse,
+                          'Mean Absolute Error (MAE)' => $pure_mae
+                      ]" />
+                  </div>
+              </div>
+          </div>
+
+
+        </div>
+    </div>
 @endsection
 
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('back-button').href = "{{ route('food-type-for-production.calculation') }}?q=" + localStorage.getItem('selectedMaterialType');
-    const storageItem = localStorage.getItem('selectedPackageMaterial');
-
-    // if (JSON.parse(localStorage.getItem('selectedPackageMaterial')).length) {
-    //     const tables = document.querySelectorAll('.table-result')
-
-    //     Array.from(tables, (element, index) => {
-    //         let trCollection = element.querySelector('tbody').children
-
-    //         for (tr of trCollection) {
-    //             if (! storageItem.includes(tr.dataset.id)) {
-    //                 tr.classList.add('hidden')
-    //             }
-    //         }
-    //     })
-    // }
+    const storageItem = JSON.parse(localStorage.getItem('selectedPackageMaterial'));
 
     let messages = document.getElementById('messages').children
 
     if (messages) {
         for (div of messages) {
-            if (! storageItem.includes(div.dataset.id)) {
+            if (storageItem.length && !storageItem.includes(div.dataset.id)) {
+                div.classList.add('hidden')
+            }
+        }
+    }
+
+    let messagespure = document.getElementById('messagespure').children
+
+    if (messagespure) {
+        for (div of messagespure) {
+            if (storageItem.length && !storageItem.includes(div.dataset.id)) {
                 div.classList.add('hidden')
             }
         }

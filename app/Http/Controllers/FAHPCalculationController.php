@@ -23,6 +23,8 @@ class FAHPCalculationController extends Controller
     {
         $type = $request->only(['type']);
 
+        session(['fahp-type' => $type]);
+
         return view('fahp.result', [
             'calculate_fahp_phase_one' => $this->fahp_service->calculate_fahp_phase_one($type['type']),
             'calculate_fuzzy_number' => $this->fahp_service->calculate_fuzzy_number($type['type']),
